@@ -3,6 +3,7 @@ package applicationMain
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -14,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.semester4.R
 import com.example.semester4.databinding.StartApplication2Binding
+import login.Login
 
 class StartApplication : AppCompatActivity() {
 
@@ -55,6 +57,20 @@ class StartApplication : AppCompatActivity() {
         menuInflater.inflate(R.menu.start_application, menu)
         return true
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_start_application)

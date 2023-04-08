@@ -1,10 +1,9 @@
 package applicationMain.ui.addBill
 
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,7 +12,8 @@ import com.example.semester4.databinding.FragmentAddbillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-
+import android.view.Menu
+import login.Login
 
 
 class AddBillFragment : Fragment() {
@@ -21,6 +21,7 @@ class AddBillFragment : Fragment() {
     private var _binding: FragmentAddbillBinding? = null
     private val binding2 get() = _binding!!
     private lateinit var database: DatabaseReference
+    var category : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,15 +60,22 @@ class AddBillFragment : Fragment() {
                     .show()
                 return@setOnClickListener
             }
-            val category : String
+
             if (private && !buisness) {
                  category = "private"
             } else if (buisness && !private){
                  category = "business"
-            } else {
+            } else if (!private && !buisness) {
                  Toast.makeText(context, "private or business was not selected", Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
+            } else if (private && buisness) {
+                Toast.makeText(context, "Please only select either private or business", Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            } else {
+                 Toast.makeText(context, "Unknown error in private or business", Toast.LENGTH_LONG)
+                    .show()
             }
 
             val steuer : String
@@ -92,6 +100,8 @@ class AddBillFragment : Fragment() {
         }
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

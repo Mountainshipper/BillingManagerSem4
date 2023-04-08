@@ -1,9 +1,16 @@
 package applicationMain.ui.removeBill
 
+import android.R
 import android.content.ContentValues
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.semester4.databinding.FragmentRemovebillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+
 
 class RemoveBillFragment : Fragment() {
 
@@ -120,6 +128,7 @@ class RemoveBillFragment : Fragment() {
                 } else if (setter == "business") {
                     database.child(Email).child("business").child(delete).removeValue()
                         .addOnSuccessListener {
+                            Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show()
                         }.addOnFailureListener() {
                             Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show()
                         }
@@ -130,8 +139,57 @@ class RemoveBillFragment : Fragment() {
 
         }
 
+        _binding?.DDisplayInfo?.setOnClickListener() {
+
+
+
+        }
+
+
+
+
+        val textView = binding.DDisplayInfo
+
+
+        textView.setOnClickListener {
+
+            // val text = _binding!!.DDisplayInfo.text.toString().trim()
+            // val newlineIndex = text.indexOf('\n')
+            /**
+            val textView = binding.DDisplayInfo
+            val editText = binding.deleteTitle
+
+            textView.isClickable = true
+            textView.movementMethod = LinkMovementMethod.getInstance()
+            onCapturedPointerEvent(it)
+
+
+            fun onCapturedPointerEvent(motionEvent: MotionEvent) {
+            textView.movementMethod = LinkMovementMethod.getInstance()
+            val layout = textView.layout
+            val x = it.x.toInt()
+            val y = it.y.toInt()
+
+            val verticalOffset: Float = motionEvent.y
+            val offset = layout.getOffsetForHorizontal(layout.getLineForVertical(y), x.toFloat())
+            val start = layout.getLineStart(layout.getLineForOffset(offset))
+            val end = layout.getLineEnd(offset)
+            val text = textView.text.substring(start, end).replace("-", "").replace("-", "")
+
+            editText.setText(text)
+            val end2 = ""
+
+            }
+            }
+             **/
+
+        }
+
         return root
     }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

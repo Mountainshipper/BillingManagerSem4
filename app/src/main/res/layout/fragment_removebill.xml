@@ -66,6 +66,7 @@
 
         <!-- Display area -->
         <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="431dp"
             android:layout_weight="2"

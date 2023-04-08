@@ -79,12 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:text="Sign In"
-
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

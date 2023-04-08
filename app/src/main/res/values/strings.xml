@@ -12,4 +12,5 @@
     <string name="AddBill">Add Bill</string>
     <string name="RemoveBill">Remove Bill</string>
     <string name="buissness">buissness</string>
+    <string name="Help" />
 </resources>
