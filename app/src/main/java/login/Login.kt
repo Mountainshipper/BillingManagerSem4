@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import applicationMain.StartApplication
-import com.example.semester4.MainActivity
 import com.example.semester4.databinding.LoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -16,6 +15,7 @@ private lateinit var binding: LoginBinding
 private lateinit var firebaseAuth: FirebaseAuth
 
 override fun onCreate(savedInstanceState: Bundle?) {
+    supportActionBar?.hide()
     super.onCreate(savedInstanceState)
     binding = LoginBinding.inflate(layoutInflater)
     setContentView(binding.root)
@@ -48,15 +48,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
                     .show()
 
             }
-    }
-
-    fun onStart() {
-        super.onStart()
-
-        if (firebaseAuth.currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
 }

@@ -60,18 +60,22 @@ class AddBillFragment : Fragment() {
                 return@setOnClickListener
             }
             val category : String
-            if (private) {
+            if (private && !buisness) {
                  category = "private"
-            } else {
+            } else if (buisness && !private){
                  category = "business"
+            } else {
+                 Toast.makeText(context, "private or business was not selected", Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
             }
 
             val steuer : String
-            if (check20) {
+            if (check20 && !check10 && !check13) {
                 steuer = "20"
-            } else if (check10) {
+            } else if (check10 && !check13 && !check20) {
                 steuer = "10"
-            } else if (check13) {
+            } else if (check13 && !check10 && !check20) {
                 steuer = "13"
             }else {
                 steuer = "0"
@@ -84,7 +88,7 @@ class AddBillFragment : Fragment() {
           //  val key = database.child("users").child(uid).child("bills").push().key
             val bill = Bill(title, price, date, steuer)
             database.child("users").child(Email).child(category).child(title).setValue(bill)
-            Toast.makeText(context, "Bill added", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Bill added", Toast.LENGTH_SHORT).show()
         }
         return root
     }
