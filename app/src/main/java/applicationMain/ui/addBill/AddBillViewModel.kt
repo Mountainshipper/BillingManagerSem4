@@ -10,4 +10,5 @@ class AddBillViewModel : ViewModel() {
         value = "Add Bill"
     }
     val text: LiveData<String> = _text
+
 }

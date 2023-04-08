@@ -2,11 +2,9 @@ package login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.semester4.R
 
 import android.content.Intent
 import android.widget.Toast
-import com.example.semester4.MainActivity
 import com.example.semester4.databinding.SignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 
