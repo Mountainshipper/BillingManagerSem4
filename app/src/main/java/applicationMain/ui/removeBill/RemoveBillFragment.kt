@@ -23,7 +23,7 @@ class RemoveBillFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
+            ViewModelProvider(this).get(RemoveBillViewModel::class.java)
 
         _binding = FragmentRemovebillBinding.inflate(inflater, container, false)
         val root: View = binding.root

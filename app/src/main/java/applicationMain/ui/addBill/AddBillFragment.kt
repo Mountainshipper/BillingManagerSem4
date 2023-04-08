@@ -1,6 +1,6 @@
 package applicationMain.ui.addBill
 
-import android.content.Context
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,13 +59,31 @@ class AddBillFragment : Fragment() {
                     .show()
                 return@setOnClickListener
             }
+            val category : String
+            if (private) {
+                 category = "private"
+            } else {
+                 category = "business"
+            }
+
+            val steuer : String
+            if (check20) {
+                steuer = "20"
+            } else if (check10) {
+                steuer = "10"
+            } else if (check13) {
+                steuer = "13"
+            }else {
+                steuer = "0"
+            }
 
             database = FirebaseDatabase.getInstance().reference
             val user = FirebaseAuth.getInstance().currentUser
-            val uid = user?.uid.toString()
-            val key = database.child("users").child(uid).child("bills").push().key
-            val bill = Bill(title, price, date, private, buisness, check20, check10, check13)
-            database.child("users").child(uid).child("bills").child(key!!).setValue(bill)
+            val email = user?.email.toString()
+            val Email = email.replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
+          //  val key = database.child("users").child(uid).child("bills").push().key
+            val bill = Bill(title, price, date, steuer)
+            database.child("users").child(Email).child(category).child(title).setValue(bill)
             Toast.makeText(context, "Bill added", Toast.LENGTH_LONG).show()
         }
         return root
