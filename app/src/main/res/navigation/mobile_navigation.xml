@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="applicationMain.ui.home.HomeFragment"
+        android:name="applicationMain.ui.home.ShowBillFragment"
         android:label="@string/Bills"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_showbill" />
 
     <fragment
         android:id="@+id/add_Bill"
-        android:name="applicationMain.ui.addBill.GalleryFragment"
+        android:name="applicationMain.ui.addBill.AddBillFragment"
         android:label="@string/AddBill"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_addbill" />
 
     <fragment
         android:id="@+id/remove_Bill"
-        android:name="applicationMain.ui.removeBill.SlideshowFragment"
+        android:name="applicationMain.ui.removeBill.RemoveBillFragment"
         android:label="@string/RemoveBill"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_removebill" />
 </navigation>
