@@ -1,7 +1,7 @@
 package applicationMain.ui.addBill
 
 
-import android.content.Intent
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -12,8 +12,7 @@ import com.example.semester4.databinding.FragmentAddbillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import android.view.Menu
-import login.Login
+import java.util.*
 
 
 class AddBillFragment : Fragment() {
@@ -22,6 +21,8 @@ class AddBillFragment : Fragment() {
     private val binding2 get() = _binding!!
     private lateinit var database: DatabaseReference
     var category : String = ""
+    var date2 : String = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,15 +40,47 @@ class AddBillFragment : Fragment() {
             textView.text = it
         }
 
+        _binding!!.txtDeadline.setOnClickListener(){
+            val selectedDateTextView = _binding!!.txtDeadline
+            val date = DatePickerDialog(
+                this.requireContext(),
+                { _, year, monthOfYear, dayOfMonth ->
+                    // Do something with the selected date
+                    selectedDateTextView.setText("$dayOfMonth-${monthOfYear + 1}-$year")
+                },
+                // Set the initial date to today's date
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            )
+            date.show()
+           // date2 = selectedDateTextView.text.toString()
+        }
+
+
         _binding?.btnSetWork?.setOnClickListener() {
             val title = _binding!!.BillTitle.text.toString()
             val price = _binding!!.txtTitel.text.toString()
-            val date = _binding!!.txtDeadline.text.toString()
+
             val private = _binding!!.Private.isChecked
             val buisness = _binding!!.Business.isChecked
             val check20 = _binding!!.check20.isChecked
             val check10 = _binding!!.check10.isChecked
             val check13 = _binding!!.check13.isChecked
+            val date = _binding!!.txtDeadline.text.toString()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             if (title.isEmpty() || price.isEmpty()) {
                 Toast.makeText(context, "please fill out all necessary forms", Toast.LENGTH_LONG)
@@ -100,7 +133,9 @@ class AddBillFragment : Fragment() {
         }
         return root
     }
+    private fun showDatePickerDialog(view: View) {
 
+    }
 
 
     override fun onDestroyView() {
