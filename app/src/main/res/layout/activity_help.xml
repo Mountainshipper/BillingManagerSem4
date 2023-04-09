@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/black"
     android:layout_height="match_parent"
-    tools:context="login.Help">
+    tools:context="applicationMain.ui.help.Help">
 
 
   <com.google.android.material.button.MaterialButton
