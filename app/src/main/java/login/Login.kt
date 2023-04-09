@@ -4,32 +4,43 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import applicationMain.MainStart
 import applicationMain.StartApplication
 import applicationMain.ui.help.Help
+import com.example.semester4.MainActivity
 import com.example.semester4.databinding.LoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
 
 
-private lateinit var binding: LoginBinding
-private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: LoginBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
-override fun onCreate(savedInstanceState: Bundle?) {
-    supportActionBar?.hide()
-    super.onCreate(savedInstanceState)
-    binding = LoginBinding.inflate(layoutInflater)
-    setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
+        super.onCreate(savedInstanceState)
+        binding = LoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
 
-    binding.switchSignIn.setOnClickListener {
-        val intent = Intent(this, SignUp::class.java)
-        startActivity(intent)}
-    binding.help.setOnClickListener {
-        val intent = Intent(this, Help::class.java)
-        startActivity(intent)}
+        binding.switchSignIn.setOnClickListener {
+            val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+        }
 
+
+        binding.help.setOnClickListener {
+            val intent = Intent(this, Help::class.java)
+            startActivity(intent)
+        }
+
+
+        binding.imageView4.setOnClickListener {
+            val intent = Intent(this, MainStart::class.java)
+            startActivity(intent)
+        }
 
 
         binding.signUp.setOnClickListener {
@@ -52,6 +63,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
                     .show()
 
             }
+        }
     }
-}
 }

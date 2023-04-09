@@ -5,6 +5,7 @@ import android.os.Bundle
 
 import android.content.Intent
 import android.widget.Toast
+import applicationMain.MainStart
 import applicationMain.ui.help.Help
 import com.example.semester4.databinding.SignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -22,13 +23,24 @@ class SignUp : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+
         binding.switchSignIn.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
+
+
         binding.help2.setOnClickListener {
             val intent = Intent(this, Help::class.java)
-            startActivity(intent)}
+            startActivity(intent)
+        }
+
+
+        binding.imageView4.setOnClickListener {
+            val intent = Intent(this, MainStart::class.java)
+            startActivity(intent)
+        }
+
 
         binding.signUp.setOnClickListener() {
             val email = binding.emailEt.text.toString()
