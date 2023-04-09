@@ -1,10 +1,11 @@
-package login
+package applicationMain.ui.help
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.semester4.databinding.ActivityHelpBinding
 import com.google.firebase.auth.FirebaseAuth
+import login.Login
 
 class Help : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class Help : AppCompatActivity() {
 
 
         binding.HelpLogin.setOnClickListener() {
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this, HelpLogin::class.java)
             startActivity(intent)
         }
 

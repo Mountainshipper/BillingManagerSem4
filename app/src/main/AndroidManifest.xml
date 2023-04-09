@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.semester4" >
+    package="com.example.semester4">
 
     <application
         android:allowBackup="true"
@@ -8,12 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Semester4" >
+        android:theme="@style/Theme.Semester4">
+        <activity
+            android:name=".HelpLogin"
+            android:exported="false" />
         <activity
             android:name=".helpLogin"
             android:exported="false" />
         <activity
-            android:name="login.Help"
+            android:name="applicationMain.ui.help.Help"
             android:exported="false" />
         <activity
             android:name="applicationMain.StartApplication"
@@ -31,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
