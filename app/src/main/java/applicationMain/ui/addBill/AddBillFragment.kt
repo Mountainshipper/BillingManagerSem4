@@ -20,8 +20,8 @@ class AddBillFragment : Fragment() {
     private var _binding: FragmentAddbillBinding? = null
     private val binding2 get() = _binding!!
     private lateinit var database: DatabaseReference
-    var category : String = ""
-    var date2 : String = ""
+    var category: String = ""
+    var date2: String = ""
 
 
     override fun onCreateView(
@@ -40,7 +40,7 @@ class AddBillFragment : Fragment() {
             textView.text = it
         }
 
-        _binding!!.txtDeadline.setOnClickListener(){
+        _binding!!.txtDeadline.setOnClickListener() {
             val selectedDateTextView = _binding!!.txtDeadline
             val date = DatePickerDialog(
                 this.requireContext(),
@@ -54,7 +54,7 @@ class AddBillFragment : Fragment() {
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
             )
             date.show()
-           // date2 = selectedDateTextView.text.toString()
+            // date2 = selectedDateTextView.text.toString()
         }
 
 
@@ -70,18 +70,6 @@ class AddBillFragment : Fragment() {
             val date = _binding!!.txtDeadline.text.toString()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
             if (title.isEmpty() || price.isEmpty()) {
                 Toast.makeText(context, "please fill out all necessary forms", Toast.LENGTH_LONG)
                     .show()
@@ -95,46 +83,48 @@ class AddBillFragment : Fragment() {
             }
 
             if (private && !buisness) {
-                 category = "private"
-            } else if (buisness && !private){
-                 category = "business"
+                category = "private"
+            } else if (buisness && !private) {
+                category = "business"
             } else if (!private && !buisness) {
-                 Toast.makeText(context, "private or business was not selected", Toast.LENGTH_LONG)
+                Toast.makeText(context, "private or business was not selected", Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             } else if (private && buisness) {
-                Toast.makeText(context, "Please only select either private or business", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    context,
+                    "Please only select either private or business",
+                    Toast.LENGTH_LONG
+                )
                     .show()
                 return@setOnClickListener
             } else {
-                 Toast.makeText(context, "Unknown error in private or business", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Unknown error in private or business", Toast.LENGTH_LONG)
                     .show()
             }
 
-            val steuer : String
+            val steuer: String
             if (check20 && !check10 && !check13) {
                 steuer = "20"
             } else if (check10 && !check13 && !check20) {
                 steuer = "10"
             } else if (check13 && !check10 && !check20) {
                 steuer = "13"
-            }else {
+            } else {
                 steuer = "0"
             }
 
             database = FirebaseDatabase.getInstance().reference
             val user = FirebaseAuth.getInstance().currentUser
             val email = user?.email.toString()
-            val Email = email.replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
-          //  val key = database.child("users").child(uid).child("bills").push().key
+            val Email = email.replace(".", "_").replace("#", "").replace("$", "").replace("[", "")
+                .replace("]", "")
+            //  val key = database.child("users").child(uid).child("bills").push().key
             val bill = Bill(title, price, date, steuer)
             database.child("users").child(Email).child(category).child(title).setValue(bill)
             Toast.makeText(context, "Bill added", Toast.LENGTH_SHORT).show()
         }
         return root
-    }
-    private fun showDatePickerDialog(view: View) {
-
     }
 
 
@@ -142,4 +132,6 @@ class AddBillFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
