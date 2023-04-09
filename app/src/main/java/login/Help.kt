@@ -4,13 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.semester4.databinding.ActivityHelpBinding
-import com.google.firebase.auth.FirebaseAuth
+
 
 class Help : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityHelpBinding
-    private lateinit var firebaseAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
