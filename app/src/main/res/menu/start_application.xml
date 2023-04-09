@@ -4,9 +4,9 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:icon="@drawable/baseline_help_outline_24"
+        android:icon="@drawable/baseline_logout_24"
         android:color="@color/white"
-        android:title="Help"
+        android:title="SignOut"
         app:showAsAction="ifRoom" />
 
 

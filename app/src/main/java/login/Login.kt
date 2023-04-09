@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import applicationMain.StartApplication
+import applicationMain.ui.help.Help
 import com.example.semester4.databinding.LoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -24,6 +25,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
     binding.switchSignIn.setOnClickListener {
         val intent = Intent(this, SignUp::class.java)
+        startActivity(intent)}
+    binding.help.setOnClickListener {
+        val intent = Intent(this, Help::class.java)
         startActivity(intent)}
 
 

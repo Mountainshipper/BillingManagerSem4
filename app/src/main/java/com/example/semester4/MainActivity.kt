@@ -3,7 +3,7 @@ package com.example.semester4
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import login.Help
+import applicationMain.ui.help.Help
 
 
 class MainActivity : AppCompatActivity() {

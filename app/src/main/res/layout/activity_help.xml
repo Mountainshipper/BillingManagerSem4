@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="login.Help">
+    tools:context="applicationMain.ui.help.Help">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/HelpSetup"
+        android:id="@+id/helpSetup"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/Return"
+        android:id="@+id/returnLogin"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/HelpLogin"
+        android:id="@+id/helpLogin"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="157dp"
         android:layout_height="wrap_content"

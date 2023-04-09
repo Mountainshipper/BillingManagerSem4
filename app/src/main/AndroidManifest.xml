@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Semester4">
         <activity
-            android:name="login.Help"
+            android:name="applicationMain.ui.help.Help"
+            android:exported="false" />
+        <activity
+            android:name="applicationMain.ui.help.HelpLogin"
+            android:exported="false" />
+        <activity
+            android:name="applicationMain.ui.help.HelpSetup"
             android:exported="false" />
         <activity
             android:name="applicationMain.StartApplication"
