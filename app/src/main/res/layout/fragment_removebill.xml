@@ -48,7 +48,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="private"
+                    android:text="@string/private2"
                     android:textColor="@color/white"
                     app:cornerRadius="15dp"
                     app:strokeColor="@color/white"
@@ -65,24 +65,26 @@
             android:background="@color/black" />
 
         <!-- Display area -->
-        <ScrollView
-            android:id="@+id/scroll"
+
+
+
+
+        <ListView
+            android:id="@+id/DDisplay_Info2"
             android:layout_width="match_parent"
             android:layout_height="431dp"
+            tools:listitem="@layout/list_item"
             android:layout_weight="2"
             android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingEnd="14dp"
             android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/DDisplay_Info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="16sp" />
 
-        </ScrollView>
+
+
+
+        </ListView>
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -93,7 +95,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginEnd="70dp"
             android:clickable="false"
-            android:hint="Title"
+            android:hint="@string/title"
             android:inputType="text"
             android:visibility="visible"
             android:textSize="20sp"
@@ -116,7 +118,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="157dp"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:textColor="@color/white"
                 app:cornerRadius="15dp"
 

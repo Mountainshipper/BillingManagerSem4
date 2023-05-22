@@ -1,20 +1,13 @@
 package applicationMain.ui.removeBill
 
-import android.R
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.semester4.databinding.FragmentRemovebillBinding
@@ -25,9 +18,6 @@ import com.google.firebase.database.*
 class RemoveBillFragment : Fragment() {
 
     private var _binding: FragmentRemovebillBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var database: DatabaseReference
     private var setter: String = ""
@@ -49,9 +39,16 @@ class RemoveBillFragment : Fragment() {
             .replace("]", "")
 
 
-        binding?.dbusiness?.setOnClickListener() {
-            binding.DDisplayInfo.text =
-                "-------------------------------------------------------------------------\n\n"
+
+        binding?.dbusiness?.setOnClickListener {
+            val dataList = mutableListOf<String>()
+            var counter = 0
+            val adapter =
+                CustomAdapter(requireActivity(), android.R.layout.simple_list_item_1, dataList)
+            binding.DDisplayInfo2.adapter = adapter
+
+            dataList.add("----")
+
             database =
                 FirebaseDatabase.getInstance().getReference("users").child(Email).child("business")
             database.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -60,18 +57,22 @@ class RemoveBillFragment : Fragment() {
                         for (childSnapshot in snapshot.children) {
                             val childKey = childSnapshot.key // get the child node's key
                             val childValue = childSnapshot.getValue() // get the child node's value
-                            binding.DDisplayInfo.text =
-                                binding.DDisplayInfo.text.toString() + childKey.toString() + "\n" + childValue.toString()
-                                    .replace("{", "").replace("}", "") + "\n\n"
-                            val email = user?.email.toString()
+                            var value =
+                                "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
+                                    .replace("{", "")
+                                    .replace("}", " ") + "\n"
+                            value =
+                                value.substringBefore("title") // Extract the substring before "date"
+                            dataList.add(
+                                value + "\n"
+                            )
                         }
-                        binding.DDisplayInfo.text =
-                            binding.DDisplayInfo.text.toString() + "-------------------------------------------------------------------------\n\n"
+                        dataList.add("----")
                         setter = "business"
                     } else {
                         // handle the case where the node does not exist
                     }
-
+                    adapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -79,12 +80,31 @@ class RemoveBillFragment : Fragment() {
                     Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
                 }
             })
+
+            binding?.DDisplayInfo2?.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+                    val childValue = dataList[position]
+                    var modifiedChildValue =
+                        childValue.substringBefore("    date") // Extract the substring before "date"
+                    modifiedChildValue =
+                        modifiedChildValue.substringAfter(": ") // Extract the substring after ": "
+                    modifiedChildValue = modifiedChildValue.trim() // Remove trailing spaces
+                    println(modifiedChildValue)
+                    _binding?.deleteTitle?.setText(modifiedChildValue)
+                }
         }
 
-        //var text : Text?= null
-        _binding?.dprivate?.setOnClickListener() {
-            binding.DDisplayInfo.text =
-                "-------------------------------------------------------------------------\n\n"
+
+
+        binding?.dprivate?.setOnClickListener {
+            val dataList = mutableListOf<String>()
+            var counter = 0
+            val adapter =
+                CustomAdapter(requireActivity(), android.R.layout.simple_list_item_1, dataList)
+            binding.DDisplayInfo2.adapter = adapter
+
+            dataList.add("----")
+
             database =
                 FirebaseDatabase.getInstance().getReference("users").child(Email).child("private")
             database.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -93,26 +113,37 @@ class RemoveBillFragment : Fragment() {
                         for (childSnapshot in snapshot.children) {
                             val childKey = childSnapshot.key // get the child node's key
                             val childValue = childSnapshot.getValue() // get the child node's value
-                            binding.DDisplayInfo.text =
-                                binding.DDisplayInfo.text.toString() + childKey.toString() + "\n" + childValue.toString()
-                                    .replace("{", "").replace("}", "") + "\n\n"
-                            val email = user?.email.toString()
+                            var value = "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString().replace("{", "")
+                                .replace("}", " ") + "\n"
+                            value = value.substringBefore("title") // Extract the substring before "date"
+                            dataList.add(value + "\n"
+                            )
                         }
-                        binding.DDisplayInfo.text =
-                            binding.DDisplayInfo.text.toString() + "-------------------------------------------------------------------------\n\n"
+                        dataList.add("----")
                         setter = "private"
                     } else {
                         // handle the case where the node does not exist
                     }
-
+                    adapter.notifyDataSetChanged()
                 }
-
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
                     Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
                 }
             })
+
+            binding?.DDisplayInfo2?.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+                    val childValue = dataList[position]
+                    var modifiedChildValue =
+                        childValue.substringBefore("    date") // Extract the substring before "date"
+                    modifiedChildValue =
+                        modifiedChildValue.substringAfter(": ") // Extract the substring after ": "
+                    modifiedChildValue = modifiedChildValue.trim() // Remove trailing spaces
+                    println(modifiedChildValue)
+                    _binding?.deleteTitle?.setText(modifiedChildValue)
+                }
         }
 
         _binding?.delete?.setOnClickListener() {
@@ -139,56 +170,33 @@ class RemoveBillFragment : Fragment() {
 
         }
 
-        _binding?.DDisplayInfo?.setOnClickListener() {
 
 
-
-        }
-
-
-
-
-        val textView = binding.DDisplayInfo
-
-
-        textView.setOnClickListener {
-
-            // val text = _binding!!.DDisplayInfo.text.toString().trim()
-            // val newlineIndex = text.indexOf('\n')
-            /**
-            val textView = binding.DDisplayInfo
-            val editText = binding.deleteTitle
-
-            textView.isClickable = true
-            textView.movementMethod = LinkMovementMethod.getInstance()
-            onCapturedPointerEvent(it)
-
-
-            fun onCapturedPointerEvent(motionEvent: MotionEvent) {
-            textView.movementMethod = LinkMovementMethod.getInstance()
-            val layout = textView.layout
-            val x = it.x.toInt()
-            val y = it.y.toInt()
-
-            val verticalOffset: Float = motionEvent.y
-            val offset = layout.getOffsetForHorizontal(layout.getLineForVertical(y), x.toFloat())
-            val start = layout.getLineStart(layout.getLineForOffset(offset))
-            val end = layout.getLineEnd(offset)
-            val text = textView.text.substring(start, end).replace("-", "").replace("-", "")
-
-            editText.setText(text)
-            val end2 = ""
-
-            }
-            }
-             **/
-
-        }
 
         return root
     }
 
+    class CustomAdapter(private val context2: Context, private val context: Int, private val dataList: MutableList<String>) : BaseAdapter() {
 
+        override fun getCount(): Int {
+            return dataList.size
+        }
+
+        override fun getItem(position: Int): Any {
+            return dataList[position]
+        }
+
+        override fun getItemId(position: Int): Long {
+            return position.toLong()
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            val view = convertView ?: LayoutInflater.from(context2).inflate(android.R.layout.simple_list_item_1, parent, false)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.text = dataList[position]
+            return view
+        }
+    }
 
 
     override fun onDestroyView() {

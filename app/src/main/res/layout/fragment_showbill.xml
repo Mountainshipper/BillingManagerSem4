@@ -62,23 +62,18 @@
             android:background="@color/black" />
 
         <!-- Display area -->
-        <ScrollView
+        <ListView
+            android:id="@+id/DDisplay_Info"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="431dp"
+            tools:listitem="@layout/list_item"
+            android:layout_weight="2"
             android:paddingStart="24dp"
             android:paddingTop="16dp"
-            android:paddingEnd="24dp"
+            android:paddingEnd="14dp"
             android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/Display_Info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="16sp" />
-
-        </ScrollView>
+        </ListView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
