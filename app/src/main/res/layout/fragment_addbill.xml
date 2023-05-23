@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
         android:backgroundTint="@color/white"
-        android:text="Add Bill"
+        android:text="@string/AddBill"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

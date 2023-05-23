@@ -15,5 +15,8 @@
     <string name="private2">private</string>
     <string name="delete">Delete</string>
     <string name="title">Title</string>
+    <string name="Return">Return</string>
+    <string name="Save">Save</string>
+    <string name="SaveAll">Save All</string>
     <string name="Help" />
 </resources>
