@@ -66,12 +66,15 @@
             android:id="@+id/DDisplay_Info"
             android:layout_width="match_parent"
             android:layout_height="431dp"
-            tools:listitem="@layout/list_item"
             android:layout_weight="2"
             android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingEnd="14dp"
-            android:paddingBottom="16dp">
+            android:paddingBottom="16dp"
+            android:divider="@android:color/darker_gray"
+            style="@style/ModernTextStyle"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:dividerHeight="1dp">
 
         </ListView>
 

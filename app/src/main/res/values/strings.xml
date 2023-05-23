@@ -16,7 +16,7 @@
     <string name="delete">Delete</string>
     <string name="title">Title</string>
     <string name="Return">Return</string>
-    <string name="Save">Save</string>
-    <string name="SaveAll">Save All</string>
+    <string name="Save">Export</string>
+    <string name="SaveAll">Export All</string>
     <string name="Help" />
 </resources>

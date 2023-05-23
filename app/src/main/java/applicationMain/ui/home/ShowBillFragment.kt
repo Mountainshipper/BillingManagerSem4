@@ -74,17 +74,22 @@ class ShowBillFragment : Fragment() {
                             var value =
                                 "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
                                     .replace("{", "")
-                                    .replace("}", " ") + "\n"
+                                    .replace("}", " ").replace(",", "\n   ")
+                                    .replace(
+                                        "=", "                                                "
+                                    ).replace("steuer", "tax:   ").replace(
+                                        "date", "date: "
+                                    ).replace("title", "title: ")
 
                             value =
                                 value.substringBefore("title") // Extract the substring before "date"
                             dataList.add(
-                                value + "\n"
+                                value
                             )
                             value2 = dataList.toString()
                         }
                         dataList.add("----")
-                        setter = "business"
+                        setter = "private"
                     } else {
                         // handle the case where the node does not exist
                     }
@@ -106,7 +111,6 @@ class ShowBillFragment : Fragment() {
                     startActivity(intent)
                 }
         }
-
 
 
         //var text : Text?= null
@@ -132,15 +136,20 @@ class ShowBillFragment : Fragment() {
                         for (childSnapshot in snapshot.children) {
                             val childKey = childSnapshot.key // get the child node's key
                             val childValue = childSnapshot.getValue() // get the child node's value
-                              var value =
+                            var value =
                                 "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
                                     .replace("{", "")
-                                    .replace("}", " ") + "\n"
+                                    .replace("}", " ").replace(",", "\n   ")
+                                    .replace(
+                                        "=", "                                                "
+                                    ).replace("steuer", "tax:   ").replace(
+                                        "date", "date: "
+                                    ).replace("title", "title: ")
 
                             value =
                                 value.substringBefore("title") // Extract the substring before "date"
                             dataList.add(
-                                value + "\n"
+                                value
                             )
                             value2 = dataList.toString()
                         }
@@ -171,9 +180,8 @@ class ShowBillFragment : Fragment() {
     }
 
 
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+}

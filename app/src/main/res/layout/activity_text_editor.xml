@@ -11,8 +11,9 @@
         android:id="@+id/textEditor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="34sp"
+
+        android:textSize="17sp"
+        android:layout_marginLeft="15dp"
         android:text="hh"
         android:scrollbars="vertical"
         tools:ignore="MissingConstraints" />
@@ -25,7 +26,6 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="60dp"
         android:text="@string/Return"
-        android:textSize="24sp"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
         android:layout_marginBottom="112dp"
         android:text="@string/Save"
         android:textColor="@color/white"
-        android:textSize="24sp"
+
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
         android:layout_marginBottom="164dp"
         android:text="@string/SaveAll"
         android:textColor="@color/white"
-        android:textSize="24sp"
+
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

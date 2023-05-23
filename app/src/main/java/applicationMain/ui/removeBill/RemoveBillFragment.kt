@@ -60,11 +60,16 @@ class RemoveBillFragment : Fragment() {
                             var value =
                                 "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
                                     .replace("{", "")
-                                    .replace("}", " ") + "\n"
+                                    .replace("}", " ").replace(",", "\n   ")
+                                    .replace(
+                                        "=", "                                                "
+                                    ).replace("steuer", "tax:   ").replace(
+                                        "date", "date: "
+                                    ).replace("title", "title: ")
                             value =
                                 value.substringBefore("title") // Extract the substring before "date"
                             dataList.add(
-                                value + "\n"
+                                value
                             )
                         }
                         dataList.add("----")
@@ -113,10 +118,19 @@ class RemoveBillFragment : Fragment() {
                         for (childSnapshot in snapshot.children) {
                             val childKey = childSnapshot.key // get the child node's key
                             val childValue = childSnapshot.getValue() // get the child node's value
-                            var value = "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString().replace("{", "")
-                                .replace("}", " ") + "\n"
-                            value = value.substringBefore("title") // Extract the substring before "date"
-                            dataList.add(value + "\n"
+                            var value =
+                                "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
+                                    .replace("{", "")
+                                    .replace("}", " ").replace(",", "\n   ")
+                                    .replace(
+                                        "=", "                                                "
+                                    ).replace("steuer", "tax:   ").replace(
+                                        "date", "date: "
+                                    ).replace("title", "title: ")
+                            value =
+                                value.substringBefore("title") // Extract the substring before "date"
+                            dataList.add(
+                                value
                             )
                         }
                         dataList.add("----")
@@ -163,8 +177,12 @@ class RemoveBillFragment : Fragment() {
                         }.addOnFailureListener() {
                             Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show()
                         }
-                }else {
-                    Toast.makeText(context, "Could not find: " + delete + " in " + setter, Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Could not find: " + delete + " in " + setter,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
@@ -176,7 +194,11 @@ class RemoveBillFragment : Fragment() {
         return root
     }
 
-    class CustomAdapter(private val context2: Context, private val context: Int, private val dataList: MutableList<String>) : BaseAdapter() {
+    class CustomAdapter(
+        private val context2: Context,
+        private val context: Int,
+        private val dataList: MutableList<String>
+    ) : BaseAdapter() {
 
         override fun getCount(): Int {
             return dataList.size
@@ -191,7 +213,8 @@ class RemoveBillFragment : Fragment() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val view = convertView ?: LayoutInflater.from(context2).inflate(android.R.layout.simple_list_item_1, parent, false)
+            val view = convertView ?: LayoutInflater.from(context2)
+                .inflate(android.R.layout.simple_list_item_1, parent, false)
             val textView = view.findViewById<TextView>(android.R.id.text1)
             textView.text = dataList[position]
             return view
