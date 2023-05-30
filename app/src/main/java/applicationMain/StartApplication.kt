@@ -32,12 +32,10 @@ class StartApplication : AppCompatActivity() {
         setSupportActionBar(binding.appBarStartApplication2.toolbar)
 
         binding.appBarStartApplication2.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Logging Out", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_HOME)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+           Intent(this, StartApplication::class.java).also {
+               startActivity(it)
+              }
+            //startActivity(intent)
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView

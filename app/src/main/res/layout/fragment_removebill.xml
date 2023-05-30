@@ -67,25 +67,19 @@
         <!-- Display area -->
 
 
-
-
         <ListView
             android:id="@+id/DDisplay_Info2"
             android:layout_width="match_parent"
-            android:layout_height="431dp"
-            tools:listitem="@layout/list_item"
+            android:layout_height="322dp"
             android:layout_weight="2"
             android:paddingStart="24dp"
             android:paddingTop="16dp"
             android:paddingEnd="14dp"
-            android:paddingBottom="16dp">
-
-
-
+            android:paddingBottom="16dp"
+            tools:listitem="@layout/list_item">
 
 
         </ListView>
-
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/delete_title"
