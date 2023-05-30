@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context="applicationMain.ui.addBill.AddBillFragment">
+
 
     <CheckBox
         android:id="@+id/Private"
@@ -12,7 +14,7 @@
         android:text="Private"
         app:layout_constraintBottom_toBottomOf="@+id/Business"
         app:layout_constraintEnd_toStartOf="@+id/Business"
-        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Business"
         app:layout_constraintVertical_bias="1.0" />
@@ -24,67 +26,107 @@
         android:text="Business"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintHorizontal_bias="0.794"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.43" />
 
-    <EditText
-        android:id="@+id/txt_Titel"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailLayout"
+        style="@style/LoginTextInputOuterFieldStyle"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:ems="15"
-        android:hint="Price including taxes"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:cornerRadius="5dp"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178" />
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp">
 
-    <EditText
-        android:id="@+id/Bill_Title"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Bill_Title"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title of reciet"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordLayout"
+        style="@style/LoginTextInputOuterFieldStyle"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:ems="15"
-        android:hint="Title"
-        android:inputType="textCapWords"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_Titel"
-        app:layout_constraintEnd_toEndOf="@+id/txt_Titel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txt_Titel"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="118dp"
+        android:textColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:cornerRadius="5dp"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.671" />
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp">
 
-    <EditText
-        android:id="@+id/txt_deadline"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_Titel"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type the price of product"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dateD"
+        style="@style/LoginTextInputOuterFieldStyle"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="15"
-        android:hint="Date (double press)"
-        android:inputType="date"
-        android:minHeight="48dp"
-        android:datePickerMode="calendar"
-        app:layout_constraintEnd_toEndOf="@+id/txt_Titel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txt_Titel"
-        app:layout_constraintTop_toBottomOf="@+id/txt_Titel" />
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="188dp"
+        android:textColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:cornerRadius="5dp"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_deadline"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:hint="Date (double press)"
+            android:datePickerMode="calendar"
+            android:layout_width="match_parent"
+            android:inputType="date"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/steuersatz"
         android:layout_width="239dp"
         android:layout_height="30dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="236dp"
         android:gravity="center"
         android:text="Steuersatz: "
         android:textSize="7pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_deadline" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
 
     <CheckBox
         android:id="@+id/check20"
@@ -119,29 +161,20 @@
         app:layout_constraintTop_toTopOf="@+id/check10"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btn_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:text="Open Camera"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_setWork"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_setWork"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/AddBill"
-        android:textColorHint="@color/black"
+        android:layout_marginBottom="68dp"
+        android:text="add bill"
+        android:textColor="@color/white"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
