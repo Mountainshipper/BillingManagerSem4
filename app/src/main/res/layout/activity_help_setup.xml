@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="44dp"
-        android:text="Return to Help"
+        android:text="@string/Return"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,14 +41,7 @@
         android:layout_width="398dp"
         android:layout_height="353dp"
         android:layout_marginTop="272dp"
-        android:text=" 1) Check your email, password, and confirmation password are correct and not empty.\n
-
-\n2) Ensure that your internet connection is stable.\n\n
-
-3) Make sure that your device isn't blocking the app's access to the internet or Firebase server.\n\n
-
-4) Check that your email address is valid and not already registered.
-"
+        android:text="@string/HelpLogin2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

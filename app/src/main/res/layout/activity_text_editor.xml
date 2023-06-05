@@ -14,7 +14,7 @@
 
         android:textSize="17sp"
         android:layout_marginLeft="15dp"
-        android:text="hh"
+        android:text=""
         android:scrollbars="vertical"
         tools:ignore="MissingConstraints" />
 

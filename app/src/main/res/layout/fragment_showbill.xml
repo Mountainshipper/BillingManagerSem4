@@ -34,7 +34,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/buissness"
+                    android:text="@string/buisness2"
                     android:textColor="@color/white"
                     app:cornerRadius="15dp"
                     app:strokeColor="@color/white"

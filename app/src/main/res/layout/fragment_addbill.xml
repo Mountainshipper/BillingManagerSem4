@@ -11,7 +11,7 @@
         android:id="@+id/Private"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Private"
+        android:text="@string/private2"
         app:layout_constraintBottom_toBottomOf="@+id/Business"
         app:layout_constraintEnd_toStartOf="@+id/Business"
         app:layout_constraintHorizontal_bias="0.38"
@@ -23,7 +23,7 @@
         android:id="@+id/Business"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Business"
+        android:text="@string/buisness2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.794"
@@ -53,7 +53,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title of reciet"
+            android:hint="@string/AddBillHin1"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +82,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type the price of product"
+            android:hint="@string/AddBillHin2"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -107,7 +107,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_deadline"
             style="@style/LoginTextInputInnerFieldStyle"
-            android:hint="Date (double press)"
+            android:hint="@string/AddBillHin3"
             android:datePickerMode="calendar"
             android:layout_width="match_parent"
             android:inputType="date"
@@ -122,7 +122,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="236dp"
         android:gravity="center"
-        android:text="Steuersatz: "
+        android:text="@string/AddBillHin4"
         android:textSize="7pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +167,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="68dp"
-        android:text="add bill"
+        android:text="@string/AddBillHin5"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

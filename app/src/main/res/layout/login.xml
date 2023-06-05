@@ -44,7 +44,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type your Email"
+            android:hint="@string/Login1"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +68,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type Your Password"
+            android:hint=""
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +78,7 @@
         android:layout_width="157dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="Sign In"
+        android:text="@string/Login3"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +94,7 @@
         android:id="@+id/switchSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Not Registered Yet , Sign Up !"
+        android:text="@string/Login4"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,7 @@
         android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Help"
+        android:text="@string/Login5"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
