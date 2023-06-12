@@ -40,8 +40,6 @@ class TextEditorActivity : AppCompatActivity() {
             text2 = textAll
             saveTextToFile()
         }
-
-
     }
 
     private fun saveTextToFile() {

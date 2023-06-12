@@ -61,7 +61,7 @@ class ShowBillFragment : Fragment() {
                 )
             binding.DDisplayInfo.adapter = adapter
 
-            dataList.add("----")
+            //dataList.add("----")
 
             database =
                 FirebaseDatabase.getInstance().getReference("users").child(Email).child("business")
@@ -88,7 +88,7 @@ class ShowBillFragment : Fragment() {
                             )
                             value2 = dataList.toString()
                         }
-                        dataList.add("----")
+                        //dataList.add("----")
                         setter = "private"
                     } else {
                         // handle the case where the node does not exist
@@ -126,7 +126,7 @@ class ShowBillFragment : Fragment() {
                 )
             binding.DDisplayInfo.adapter = adapter
 
-            dataList.add("----")
+            //dataList.add("----")
 
             database =
                 FirebaseDatabase.getInstance().getReference("users").child(Email).child("private")
@@ -153,7 +153,7 @@ class ShowBillFragment : Fragment() {
                             )
                             value2 = dataList.toString()
                         }
-                        dataList.add("----")
+                        //dataList.add("----")
                         setter = "private"
                     } else {
                         // handle the case where the node does not exist

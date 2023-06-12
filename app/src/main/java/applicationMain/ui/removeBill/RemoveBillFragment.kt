@@ -47,7 +47,7 @@ class RemoveBillFragment : Fragment() {
                 CustomAdapter(requireActivity(), android.R.layout.simple_list_item_1, dataList)
             binding.DDisplayInfo2.adapter = adapter
 
-            dataList.add("----")
+            //dataList.add("----")
 
             database =
                 FirebaseDatabase.getInstance().getReference("users").child(Email).child("business")
@@ -72,7 +72,7 @@ class RemoveBillFragment : Fragment() {
                                 value
                             )
                         }
-                        dataList.add("----")
+                      //  dataList.add("----")
                         setter = "business"
                     } else {
                         // handle the case where the node does not exist
@@ -108,7 +108,7 @@ class RemoveBillFragment : Fragment() {
                 CustomAdapter(requireActivity(), android.R.layout.simple_list_item_1, dataList)
             binding.DDisplayInfo2.adapter = adapter
 
-            dataList.add("----")
+           // dataList.add("----")
 
             database =
                 FirebaseDatabase.getInstance().getReference("users").child(Email).child("private")
@@ -133,7 +133,7 @@ class RemoveBillFragment : Fragment() {
                                 value
                             )
                         }
-                        dataList.add("----")
+                        //dataList.add("----")
                         setter = "private"
                     } else {
                         // handle the case where the node does not exist
