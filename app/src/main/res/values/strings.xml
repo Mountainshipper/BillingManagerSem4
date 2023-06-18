@@ -26,8 +26,8 @@
     <string name="HelpText2">Day</string>
 
     //Help extra
-    <string name="HelpLogin1">If you\'re having trouble logging in, double-check your login credentials and try resetting your password if needed. Check for any known issues with the application\'s login system or server, and ensure your device is connected to the internet. Restarting the application or your device may also help. If the issue persists, contact the application's customer support team for further assistance.</string>
-    <string name="HelpLogin2"> 1) Check your email, password, and confirmation password are correct and not empty \n2) Ensure that your internet connection is stable.\n\n 3) Make sure that your device isn't blocking the app's access to the internet or Firebase server.\n\n 4) Check that your email address is valid and not already registered.</string>
+    <string name="HelpLogin1">f</string>
+    <string name="HelpLogin2">d</string>
     <string name="Help1">Help with creating an account</string>
 
     //Add bill
@@ -44,6 +44,7 @@
     <string name="Login4">Not Registered Yet , Sign Up !</string>
     <string name="Login5">Help</string>
     <string name="Login6">Retype Your Password</string>
+    <string name="Login7">Reset Passowrd</string>
     <string name="SignUp">Sign up</string>
     <string name="SignUp2">Already Registered , Sign In !</string>
 

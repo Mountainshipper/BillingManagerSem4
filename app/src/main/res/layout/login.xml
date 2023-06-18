@@ -68,7 +68,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=""
+            android:hint="@string/Login2"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
-        app:layout_constraintVertical_bias="0.429"
+        app:layout_constraintVertical_bias="0.265"
 
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
@@ -103,6 +103,20 @@
         app:layout_constraintTop_toBottomOf="@+id/signUp"
         app:layout_constraintVertical_bias="0.166" />
 
+
+    <TextView
+        android:id="@+id/resetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Login7"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUp"
+        app:layout_constraintVertical_bias="0.391" />
+
     <TextView
         android:id="@+id/help"
         android:layout_width="wrap_content"
@@ -113,6 +127,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUp"
-        app:layout_constraintVertical_bias="0.555" />
+        app:layout_constraintVertical_bias="0.633" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
