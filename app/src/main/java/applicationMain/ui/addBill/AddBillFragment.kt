@@ -2,6 +2,7 @@ package applicationMain.ui.addBill
 
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -10,7 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import applicationMain.StartApplication
-import applicationMain.ui.home.TextEditorActivity
+import com.example.semester4.R
 import com.example.semester4.databinding.FragmentAddbillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -62,6 +63,7 @@ class AddBillFragment : Fragment() {
 
 
         _binding?.btnSetWork?.setOnClickListener() {
+
             val title = _binding!!.BillTitle.text.toString()
             val price = _binding!!.txtTitel.text.toString()
 
@@ -126,10 +128,15 @@ class AddBillFragment : Fragment() {
             val bill = Bill(title, price, date, steuer)
             database.child("users").child(Email).child(category).child(title).setValue(bill)
             Toast.makeText(context, "Bill added", Toast.LENGTH_SHORT).show()
+
             val intent = Intent(requireContext(), StartApplication::class.java)
             startActivity(intent)
         }
         return root
+    }
+
+    private fun ProgressDialog(addBillFragment: AddBillFragment, customProgressDialog: Int) {
+
     }
 
 
@@ -137,6 +144,7 @@ class AddBillFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 
 }
