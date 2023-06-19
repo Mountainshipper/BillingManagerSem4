@@ -47,6 +47,7 @@ class ShowBillFragment : Fragment() {
         val email = user?.email.toString()
         val Email = email.replace(".", "_").replace("#", "").replace("$", "").replace("[", "")
             .replace("]", "")
+        Miau(Email)
 
 
         binding?.bbuissness?.setOnClickListener() {
