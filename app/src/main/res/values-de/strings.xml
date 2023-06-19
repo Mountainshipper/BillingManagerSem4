@@ -5,7 +5,7 @@
     <string name="Bills">Rechnungen</string>
     <string name="AddBill">Rechnung hinzufügen</string>
     <string name="RemoveBill">Rechnung löschen</string>
-    <string name="buisness2">Unternehmen</string>
+    <string name="buisness2">Firma</string>
     <string name="private2">Privat</string>
     <string name="delete">Löschen</string>
     <string name="title">Titel</string>
@@ -26,10 +26,10 @@
     <string name="AddBillHin5">Rechnung hinzufügen</string>
     <string name="Login2">Geben Sie Ihr Passwort ein</string>
     <string name="Login3">Einloggen</string>
-    <string name="Login4">Noch nicht registriert, melden Sie sich an!</string>
-    <string name="Login5">Hilfe</string>
-    <string name="Login6">Wiederholen Sie Ihr Passwort</string>
-    <string name="Login7">Passwort zurücksetzen</string>
+    <string name="Login4"><u>Noch nicht registriert, melden Sie sich an!</u></string>
+    <string name="Login5"><u>Hilfe</u></string>
+    <string name="Login6"><u>Wiederholen Sie Ihr Passwort</u></string>
+    <string name="Login7"><u>Passwort zurücksetzen</u></string>
     <string name="SignUp">Anmelden</string>
-    <string name="SignUp2">Bereits registriert, anmelden!</string>
+    <string name="SignUp2"><u>Bereits registriert, anmelden!</u></string>
 </resources>
