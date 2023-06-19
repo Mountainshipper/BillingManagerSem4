@@ -50,66 +50,7 @@ class ShowBillFragment : Fragment() {
 
 
         binding?.bbuissness?.setOnClickListener() {
-            val dataList = mutableListOf<String>()
-            var counter = 0
-            var value2 = ""
-            val adapter =
-                RemoveBillFragment.CustomAdapter(
-                    requireActivity(),
-                    R.layout.simple_list_item_1,
-                    dataList
-                )
-            binding.DDisplayInfo.adapter = adapter
-
-            //dataList.add("----")
-
-            database =
-                FirebaseDatabase.getInstance().getReference("users").child(Email).child("business")
-            database.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (childSnapshot in snapshot.children) {
-                            val childKey = childSnapshot.key // get the child node's key
-                            val childValue = childSnapshot.getValue() // get the child node's value
-                            var value =
-                                "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
-                                    .replace("{", "")
-                                    .replace("}", " ").replace(",", "\n   ")
-                                    .replace(
-                                        "=", "                                                "
-                                    ).replace("steuer", "tax:   ").replace(
-                                        "date", "date: "
-                                    ).replace("title", "title: ")
-
-                            value =
-                                value.substringBefore("title") // Extract the substring before "date"
-                            dataList.add(
-                                value
-                            )
-                            value2 = dataList.toString()
-                        }
-                        //dataList.add("----")
-                        setter = "private"
-                    } else {
-                        // handle the case where the node does not exist
-                    }
-                    adapter.notifyDataSetChanged()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
-                    Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
-                }
-            })
-            binding?.DDisplayInfo?.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, view, position, id ->
-                    val childValue = dataList[position]
-                    // Launch TextEditorActivity with the modifiedChildValue as text
-                    val intent = Intent(requireContext(), TextEditorActivity::class.java)
-                    intent.putExtra("text", childValue)
-                    intent.putExtra("complete", value2)
-                    startActivity(intent)
-                }
+          Miau(Email)
         }
 
 
@@ -179,6 +120,68 @@ class ShowBillFragment : Fragment() {
         return root
     }
 
+    fun Miau (Email: String){
+        val dataList = mutableListOf<String>()
+        var counter = 0
+        var value2 = ""
+        val adapter =
+            RemoveBillFragment.CustomAdapter(
+                requireActivity(),
+                R.layout.simple_list_item_1,
+                dataList
+            )
+        binding.DDisplayInfo.adapter = adapter
+
+        //dataList.add("----")
+
+        database =
+            FirebaseDatabase.getInstance().getReference("users").child(Email).child("business")
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        val childKey = childSnapshot.key // get the child node's key
+                        val childValue = childSnapshot.getValue() // get the child node's value
+                        var value =
+                            "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
+                                .replace("{", "")
+                                .replace("}", " ").replace(",", "\n   ")
+                                .replace(
+                                    "=", "                                                "
+                                ).replace("steuer", "tax:   ").replace(
+                                    "date", "date: "
+                                ).replace("title", "title: ")
+
+                        value =
+                            value.substringBefore("title") // Extract the substring before "date"
+                        dataList.add(
+                            value
+                        )
+                        value2 = dataList.toString()
+                    }
+                    //dataList.add("----")
+                    setter = "private"
+                } else {
+                    // handle the case where the node does not exist
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
+                Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
+            }
+        })
+        binding?.DDisplayInfo?.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val childValue = dataList[position]
+                // Launch TextEditorActivity with the modifiedChildValue as text
+                val intent = Intent(requireContext(), TextEditorActivity::class.java)
+                intent.putExtra("text", childValue)
+                intent.putExtra("complete", value2)
+                startActivity(intent)
+            }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
