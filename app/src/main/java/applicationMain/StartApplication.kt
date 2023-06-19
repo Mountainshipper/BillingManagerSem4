@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.semester4.R
 import com.example.semester4.databinding.StartApplication2Binding
+import com.google.firebase.auth.FirebaseAuth
 import login.Login
 
 
@@ -59,6 +60,7 @@ class StartApplication : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
+                FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, Login::class.java)
                 startActivity(intent)
                 true

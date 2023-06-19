@@ -30,6 +30,12 @@ class Login : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+
+        if(FirebaseAuth.getInstance().currentUser != null){
+            val intent = Intent(this, StartApplication::class.java)
+            startActivity(intent)
+        }
+
         binding.switchSignIn.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
