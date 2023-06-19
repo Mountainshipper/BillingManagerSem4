@@ -88,7 +88,7 @@
         android:layout_width="174dp"
         android:layout_height="83dp"
         android:layout_marginTop="360dp"
-        android:text="Day"
+        android:text="@string/HelpText2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="48sp"

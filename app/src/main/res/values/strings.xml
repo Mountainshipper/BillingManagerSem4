@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Billing Manager</string>
-    <string name="title_activity_start_application">StartApplication</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_start_application" translatable="false">StartApplication</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="Bills">Bills</string>
@@ -31,22 +31,22 @@
     <string name="Help1">Help with creating an account</string>
 
     //Add bill
-    <string name="AddBillHin1">Title of reciet</string>
+    <string name="AddBillHin1">Title of receipt</string>
     <string name="AddBillHin2">Type the price of product</string>
     <string name="AddBillHin3">Date (double press)</string>
-    <string name="AddBillHin4">Steuersatz: </string>
+    <string name="AddBillHin4">Tax rate:</string>
     <string name="AddBillHin5">add bill </string>
 
     //Login SignUp
     <string name="Login1">Type your Email </string>
     <string name="Login2">Type Your Password</string>
     <string name="Login3">Sign In</string>
-    <string name="Login4">Not Registered Yet , Sign Up !</string>
+    <string name="Login4">Not Registered Yet, Sign Up!</string>
     <string name="Login5">Help</string>
     <string name="Login6">Retype Your Password</string>
-    <string name="Login7">Reset Passowrd</string>
+    <string name="Login7">Reset Password</string>
     <string name="SignUp">Sign up</string>
-    <string name="SignUp2">Already Registered , Sign In !</string>
+    <string name="SignUp2">Already Registered, Sign In!</string>
 
 
 

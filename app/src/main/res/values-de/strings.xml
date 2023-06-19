@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Billing Manager</string>
+    <string name="action_settings">Einstelluingen</string>
+    <string name="Bills">Rechnungen</string>
+    <string name="AddBill">Rechnung hinzufügen</string>
+    <string name="RemoveBill">Rechnung löschen</string>
+    <string name="buisness2">Unternehmen</string>
+    <string name="private2">Privat</string>
+    <string name="delete">Löschen</string>
+    <string name="title">Titel</string>
+    <string name="Save">Exportieren</string>
+    <string name="SaveAll">Alle exportieren</string>
+    <string name="Return">Zurück</string>
+    <string name="Help2">Hilfe mit Login</string>
+    <string name="Login1">Geben sie Ihre Email an</string>
+    <string name="HelpText2">Tag</string>
+    <string name="HelpText1">"Die Entwickler wünschen Ihnen einen "</string>
+    <string name="HelpLogin1">Wenn Sie Probleme bei der Anmeldung haben, überprüfen Sie Ihre Anmeldedaten und setzen Sie gegebenenfalls Ihr Passwort zurück. Prüfen Sie, ob es bekannte Probleme mit dem Anmeldesystem oder dem Server der Anwendung gibt, und stellen Sie sicher, dass Ihr Gerät mit dem Internet verbunden ist. Ein Neustart der Anwendung oder Ihres Geräts kann ebenfalls Abhilfe schaffen. Wenn das Problem weiterhin besteht, wenden Sie sich an den Kundendienst der Anwendung, um weitere Unterstützung zu erhalten.  Übersetzt mit www.DeepL.com/Translator (kostenlose Version)</string>
+    <string name="HelpLogin2">1) Stellen Sie sicher, dass Ihre E-Mail, Ihr Passwort und Ihr Bestätigungspasswort korrekt und nicht leer sind.  2) Stellen Sie sicher, dass Ihre Internetverbindung stabil ist.   3) Stellen Sie sicher, dass Ihr Gerät den Zugriff der App auf das Internet oder den Firebase-Server nicht blockiert.   4) Stellen Sie sicher, dass Ihre E-Mail-Adresse gültig und nicht bereits registriert ist.</string>
+    <string name="Help1">Hilfe bei der Erstellung eines Kontos</string>
+    <string name="AddBillHin1">Titel der Quittung</string>
+    <string name="AddBillHin2">Geben Sie den Preis des Produkts ein</string>
+    <string name="AddBillHin3">Datum (Doppelklick)</string>
+    <string name="AddBillHin4">Steuersatz:</string>
+    <string name="AddBillHin5">Rechnung hinzufügen</string>
+    <string name="Login2">Geben Sie Ihr Passwort ein</string>
+    <string name="Login3">Einloggen</string>
+    <string name="Login4">Noch nicht registriert, melden Sie sich an!</string>
+    <string name="Login5">Hilfe</string>
+    <string name="Login6">Wiederholen Sie Ihr Passwort</string>
+    <string name="Login7">Passwort zurücksetzen</string>
+    <string name="SignUp">Anmelden</string>
+    <string name="SignUp2">Bereits registriert, anmelden!</string>
+</resources>
