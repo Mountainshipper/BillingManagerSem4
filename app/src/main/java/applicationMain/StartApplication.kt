@@ -1,6 +1,8 @@
 package applicationMain
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -14,8 +16,10 @@ import com.example.semester4.R
 import com.example.semester4.databinding.StartApplication2Binding
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import applicationMain.ui.addBill.AddBillFragment
 import applicationMain.ui.home.ShowBillFragment
+import login.Login
 
 class StartApplication : AppCompatActivity() {
 
@@ -44,6 +48,12 @@ class StartApplication : AppCompatActivity() {
 
         updateFabIcon()  // Set the correct FAB icon on startup
 
+        // Set up logout button click listener
+        val logoutButton: ImageView = findViewById(R.id.logout_button)
+        logoutButton.setOnClickListener {
+            logoutUser()  // Call the logout function when clicked
+        }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_start_application)
@@ -54,6 +64,14 @@ class StartApplication : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    // Method to handle user logout
+    private fun logoutUser() {
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, Login::class.java)
+        startActivity(intent)
+        finish()  // Close the current activity
     }
 
     // Method to check if the current fragment is ShowBillFragment
