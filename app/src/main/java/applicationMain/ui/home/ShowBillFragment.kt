@@ -131,10 +131,10 @@ class ShowBillFragment : Fragment() {
                 if (snapshot.exists()) {
                     var counter = 0
                     for (childSnapshot in snapshot.children) {
-                        val childKey = childSnapshot.key
+
                         val childValue = childSnapshot.getValue() as Map<*, *>
                         val title = childValue["title"] as? String ?: "Unbekannt" // Titel extrahieren
-                        var value = "\n${++counter}: $childKey\n    Title: $title\n    ${childValue["date"]}\n    ${childValue["steuer"]}"
+                        var value = "\n${++counter}: Title: $title\n    ${childValue["date"]}\n    ${childValue["steuer"]}"
                         dataList.add(value)
                     }
                     setter = "private"
@@ -157,10 +157,9 @@ class ShowBillFragment : Fragment() {
                 if (snapshot.exists()) {
                     var counter = 0
                     for (childSnapshot in snapshot.children) {
-                        val childKey = childSnapshot.key
                         val childValue = childSnapshot.getValue() as Map<*, *>
                         val title = childValue["title"] as? String ?: "Unbekannt"
-                        var value = "\n${++counter}: $childKey\n    Title: $title\n    ${childValue["date"]}\n    ${childValue["steuer"]}"
+                        var value = "\n${++counter}: Title: $title\n    ${childValue["date"]}\n    ${childValue["steuer"]}"
                         dataList.add(value)
                     }
                     setter = "business"
