@@ -1,28 +1,27 @@
 package applicationMain
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.example.semester4.R
 import com.example.semester4.databinding.StartApplication2Binding
-import com.google.firebase.auth.FirebaseAuth
-import login.Login
-
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import applicationMain.ui.addBill.AddBillFragment
+import applicationMain.ui.home.ShowBillFragment
 
 class StartApplication : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: StartApplication2Binding
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,46 +31,67 @@ class StartApplication : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarStartApplication2.toolbar)
 
-        binding.appBarStartApplication2.fab.setOnClickListener { view ->
-           Intent(this, StartApplication::class.java).also {
-               startActivity(it)
-              }
-            //startActivity(intent)
+        fab = binding.appBarStartApplication2.fab
+
+        // Set up FAB click listener
+        fab.setOnClickListener {
+            if (isCurrentFragmentAddBill()) {
+                openShowBillFragment()  // Navigate to ShowBill if the current fragment is AddBill
+            } else {
+                openAddBillFragment()  // Otherwise, navigate to AddBill
+            }
         }
+
+        updateFabIcon()  // Set the correct FAB icon on startup
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_start_application)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        // Configure the app bar for navigation
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.add_Bill, R.id.remove_Bill
-            ), drawerLayout
+            setOf(R.id.nav_home, R.id.add_Bill, R.id.remove_Bill), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.start_application, menu)
-        return true
+    // Method to check if the current fragment is AddBillFragment
+    private fun isCurrentFragmentAddBill(): Boolean {
+        val currentFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_start_application)
+        return currentFragment is AddBillFragment
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, Login::class.java)
-                startActivity(intent)
-                true
-            }
 
-            else -> super.onOptionsItemSelected(item)
+    // Method to open AddBillFragment
+    private fun openAddBillFragment() {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragment = AddBillFragment()
+        transaction.replace(R.id.nav_host_fragment_content_start_application, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+        updateFabIcon() // Update FAB icon after navigation
+    }
+
+    // Method to open ShowBillFragment
+    private fun openShowBillFragment() {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragment = ShowBillFragment()
+        transaction.replace(R.id.nav_host_fragment_content_start_application, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+        updateFabIcon() // Update FAB icon after navigation
+    }
+
+    // Update the FAB icon based on the current fragment
+    private fun updateFabIcon() {
+        if (isCurrentFragmentAddBill()) {
+            fab.setImageResource(R.drawable.home)  // Set to home icon
+        } else {
+            fab.setImageResource(R.drawable.add)   // Set to add icon
         }
-
-        return super.onOptionsItemSelected(item)
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_start_application)
