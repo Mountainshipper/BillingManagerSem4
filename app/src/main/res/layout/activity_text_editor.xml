@@ -1,71 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context="applicationMain.ui.home.TextEditorActivity">
 
-    <EditText
-        android:id="@+id/textEditor"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleLayout"
+        style="@style/LoginTextInputOuterFieldStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:textSize="17sp"
-        android:layout_marginLeft="15dp"
-        android:text=""
-        android:scrollbars="vertical"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/returnLogin2"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="157dp"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="60dp"
-        android:text="@string/Return"
+        android:layout_marginTop="48dp"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleEditor"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Titel eingeben"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dateLayout"
+        style="@style/LoginTextInputOuterFieldStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
+        android:textColor="@color/white"
+        app:cornerRadius="15dp"
         app:strokeColor="@color/white"
-        app:strokeWidth="2dp" />
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dateEditor"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Datum auswählen"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/taxLayout"
+        style="@style/LoginTextInputOuterFieldStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
+        android:textColor="@color/white"
+        app:cornerRadius="15dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/taxEditor"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Steuerbetrag eingeben"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/taxLayout">
+
+        <CheckBox
+            android:id="@+id/check20"
+            android:layout_marginLeft="96dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20%" />
+
+        <CheckBox
+            android:id="@+id/check10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="10%" />
+
+        <CheckBox
+            android:id="@+id/check13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="13%" />
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="157dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="112dp"
-        android:text="@string/Save"
+        android:layout_marginTop="98dp"
+        android:text="Speichern"
         android:textColor="@color/white"
-
         app:cornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveButton2"
+        android:id="@+id/returnLogin2"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="157dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="164dp"
-        android:text="@string/SaveAll"
+        android:text="Abbrechen"
         android:textColor="@color/white"
-
         app:cornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/saveButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package applicationMain.ui.home
 
 import CustomAdapter
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Canvas
@@ -82,8 +81,9 @@ class ShowBillFragment : Fragment() {
                     // Eintrag bearbeiten
                     val item = dataList[position]
                     val intent = Intent(requireContext(), TextEditorActivity::class.java)
-                    intent.putExtra("text", item) // Übergibt den Text an die Bearbeitungsaktivität
-                    intent.putExtra("complete", dataList.toString()) // Übergibt die gesamte Liste
+                    intent.putExtra("textKey", item.substringAfter(": ").substringBefore("\n").trim()) // Schlüssel
+                    intent.putExtra("complete", item) // Vollständige Daten
+                    intent.putExtra("isPrivate", setter == "private") // Ob es sich um private oder business Einträge handelt
                     startActivity(intent)
 
                     // Den Swipe rückgängig machen, da der Eintrag nur bearbeitet und nicht gelöscht wird
