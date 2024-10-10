@@ -1,14 +1,9 @@
 package applicationMain.ui.home
 
-import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.SpannableStringBuilder
-import android.widget.CheckBox
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.semester4.R
 import com.example.semester4.databinding.ActivityTextEditorBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -28,40 +23,46 @@ class TextEditorActivity : AppCompatActivity() {
         binding = ActivityTextEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        textKey = intent.getStringExtra("textKey").toString()
+        textKey = intent.getStringExtra("textKey").toString() // Hier den Schlüssel für den Eintrag erhalten
         isPrivate = intent.getBooleanExtra("isPrivate", true)
 
-        val completeText = intent.getStringExtra("complete").toString()
-        setInitialData(completeText)
+        loadDataFromFirebase()
 
         binding.saveButton.setOnClickListener {
-            saveChangesToFirebase()
+            saveChangesToFirebase() // Speichern der Änderungen
         }
 
         binding.returnLogin2.setOnClickListener {
-            finish()
+            finish() // Zurück zur vorherigen Aktivität
         }
 
         binding.dateEditor.setOnClickListener {
-            showDatePicker()
+            showDatePicker() // Öffnen des Date Pickers
         }
     }
 
-    private fun setInitialData(completeText: String) {
-        val dataMap = completeText.lines().map {
-            val split = it.split(":")
-            split[0].trim() to split.getOrNull(1)?.trim()
-        }.toMap()
+    private fun loadDataFromFirebase() {
+        val path = if (isPrivate) "private" else "business"
+        val itemRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(textKey)
 
-        binding.titleEditor.setText(dataMap["title"] ?: "")
-        binding.dateEditor.setText(dataMap["date"] ?: "")
-        binding.taxEditor.setText(dataMap["steuer"] ?: "")
+        itemRef.get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val dataMap = snapshot.value as Map<*, *>
+                binding.titleEditor.setText(dataMap["title"] as? String ?: "")
+                binding.dateEditor.setText(dataMap["date"] as? String ?: "")
+                binding.taxEditor.setText(dataMap["steuer"] as? String ?: "")
 
-        // Setze die Checkboxen basierend auf den aktuellen Daten
-        val steuer = dataMap["steuer"]?.toDoubleOrNull() ?: 0.0
-        binding.check20.isChecked = steuer == 20.0
-        binding.check10.isChecked = steuer == 10.0
-        binding.check13.isChecked = steuer == 13.0
+                // Setze die Checkboxen
+                val steuer = dataMap["steuer"]?.toString()?.toDoubleOrNull() ?: 0.0
+                binding.check20.isChecked = steuer == 20.0
+                binding.check10.isChecked = steuer == 10.0
+                binding.check13.isChecked = steuer == 13.0
+            } else {
+                Toast.makeText(this, "Eintrag nicht gefunden!", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { e ->
+            Toast.makeText(this, "Fehler beim Laden der Daten: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun saveChangesToFirebase() {
@@ -74,18 +75,20 @@ class TextEditorActivity : AppCompatActivity() {
             return
         }
 
+        // Hier wird das gesamte Objekt aktualisiert
         val updatedData = mapOf(
             "title" to newTitle,
             "date" to newDate,
             "steuer" to newTax
         )
 
+        // Hier den Pfad zu `test` anpassen
         val path = if (isPrivate) "private" else "business"
         val entryRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(textKey)
 
         entryRef.setValue(updatedData).addOnSuccessListener {
             Toast.makeText(this, "Änderungen erfolgreich gespeichert!", Toast.LENGTH_SHORT).show()
-            finish()
+            finish() // Zurück zur vorherigen Ansicht
         }.addOnFailureListener { e ->
             Toast.makeText(this, "Fehler beim Speichern: ${e.message}", Toast.LENGTH_LONG).show()
         }
@@ -96,7 +99,7 @@ class TextEditorActivity : AppCompatActivity() {
             binding.check20.isChecked -> "20.0"
             binding.check10.isChecked -> "10.0"
             binding.check13.isChecked -> "13.0"
-            else -> "0.0" // Default-Wert, falls keine Checkbox ausgewählt ist
+            else -> "0.0" // Standardwert, falls keine Checkbox ausgewählt ist
         }
     }
 
@@ -108,7 +111,7 @@ class TextEditorActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
             val formattedDate = String.format("%02d.%02d.%d", selectedDay, selectedMonth + 1, selectedYear)
-            binding.dateEditor.setText(formattedDate)
+            binding.dateEditor.setText(formattedDate) // Setze das Datum in das Textfeld
         }, year, month, day)
 
         datePickerDialog.show()

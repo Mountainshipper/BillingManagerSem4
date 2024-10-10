@@ -37,10 +37,10 @@ class ShowBillFragment : Fragment() {
 
         val user = FirebaseAuth.getInstance().currentUser
         val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
-        Miau(email)
+        loadPrivateData(email)
 
         binding.bbuissness.setOnClickListener {
-            Miau(email)
+            loadBusinessData(email)
         }
 
         binding.bprivate.setOnClickListener {
@@ -69,16 +69,13 @@ class ShowBillFragment : Fragment() {
                 val position = viewHolder.adapterPosition
 
                 if (direction == ItemTouchHelper.LEFT) {
-                    // Firebase: Eintrag löschen
                     val itemKey = dataList[position].substringAfter(": ").substringBefore("\n").trim() // extrahiere den Schlüssel
                     deleteFromFirebase(itemKey)
 
-                    // RecyclerView: Eintrag löschen
                     dataList.removeAt(position)
                     adapter.notifyItemRemoved(position)
 
                 } else if (direction == ItemTouchHelper.RIGHT) {
-                    // Eintrag bearbeiten
                     val item = dataList[position]
                     val intent = Intent(requireContext(), TextEditorActivity::class.java)
                     intent.putExtra("textKey", item.substringAfter(": ").substringBefore("\n").trim()) // Schlüssel
@@ -86,7 +83,6 @@ class ShowBillFragment : Fragment() {
                     intent.putExtra("isPrivate", setter == "private") // Ob es sich um private oder business Einträge handelt
                     startActivity(intent)
 
-                    // Den Swipe rückgängig machen, da der Eintrag nur bearbeitet und nicht gelöscht wird
                     adapter.notifyItemChanged(position)
                 }
             }
@@ -101,7 +97,6 @@ class ShowBillFragment : Fragment() {
                 isCurrentlyActive: Boolean
             ) {
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                // Optional: Hier kannst du visuelle Hinweise für das Swipen (z.B. Icons) hinzufügen
             }
         })
 
@@ -112,7 +107,6 @@ class ShowBillFragment : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser
         val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
 
-        // Prüfen, ob "private" oder "business" bearbeitet wird
         val path = if (setter == "private") {
             "private"
         } else {
@@ -138,9 +132,9 @@ class ShowBillFragment : Fragment() {
                     var counter = 0
                     for (childSnapshot in snapshot.children) {
                         val childKey = childSnapshot.key
-                        val childValue = childSnapshot.getValue()
-                        var value = "\n${++counter}: $childKey\n    ${childValue.toString().replace("{", "").replace("}", " ").replace(",", "\n   ").replace("=", "                                                ").replace("steuer", "tax:   ").replace("date", "date: ").replace("title", "title: ")}"
-                        value = value.substringBefore("title")
+                        val childValue = childSnapshot.getValue() as Map<*, *>
+                        val title = childValue["title"] as? String ?: "Unbekannt" // Titel extrahieren
+                        var value = "\n${++counter}: $childKey\n    Title: $title\n    ${childValue["date"]}\n    ${childValue["steuer"]}"
                         dataList.add(value)
                     }
                     setter = "private"
@@ -155,7 +149,7 @@ class ShowBillFragment : Fragment() {
         })
     }
 
-    private fun Miau(email: String) {
+    private fun loadBusinessData(email: String) {
         database = FirebaseDatabase.getInstance().getReference("users").child(email).child("business")
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -164,9 +158,9 @@ class ShowBillFragment : Fragment() {
                     var counter = 0
                     for (childSnapshot in snapshot.children) {
                         val childKey = childSnapshot.key
-                        val childValue = childSnapshot.getValue()
-                        var value = "\n${++counter}: $childKey\n    ${childValue.toString().replace("{", "").replace("}", " ").replace(",", "\n   ").replace("=", "                                                ").replace("steuer", "tax:   ").replace("date", "date: ").replace("title", "title: ")}"
-                        value = value.substringBefore("title")
+                        val childValue = childSnapshot.getValue() as Map<*, *>
+                        val title = childValue["title"] as? String ?: "Unbekannt"
+                        var value = "\n${++counter}: $childKey\n    Title: $title\n    ${childValue["date"]}\n    ${childValue["steuer"]}"
                         dataList.add(value)
                     }
                     setter = "business"
