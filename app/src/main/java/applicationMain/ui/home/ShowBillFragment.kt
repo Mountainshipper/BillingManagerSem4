@@ -1,29 +1,23 @@
 package applicationMain.ui.home
 
-
 import CustomAdapter
-import android.R
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Toast
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-import applicationMain.ui.removeBill.RemoveBillFragment
 import com.example.semester4.databinding.FragmentShowbillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-
 
 class ShowBillFragment : Fragment() {
 
@@ -63,7 +57,7 @@ class ShowBillFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
 
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -74,13 +68,65 @@ class ShowBillFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                dataList.removeAt(position)
-                adapter.notifyItemRemoved(position)
-                // Optional: Firebase aktualisieren und den Eintrag dort löschen
+
+                if (direction == ItemTouchHelper.LEFT) {
+                    // Firebase: Eintrag löschen
+                    val itemKey = dataList[position].substringAfter(": ").substringBefore("\n").trim() // extrahiere den Schlüssel
+                    deleteFromFirebase(itemKey)
+
+                    // RecyclerView: Eintrag löschen
+                    dataList.removeAt(position)
+                    adapter.notifyItemRemoved(position)
+
+                } else if (direction == ItemTouchHelper.RIGHT) {
+                    // Eintrag bearbeiten
+                    val item = dataList[position]
+                    val intent = Intent(requireContext(), TextEditorActivity::class.java)
+                    intent.putExtra("text", item) // Übergibt den Text an die Bearbeitungsaktivität
+                    intent.putExtra("complete", dataList.toString()) // Übergibt die gesamte Liste
+                    startActivity(intent)
+
+                    // Den Swipe rückgängig machen, da der Eintrag nur bearbeitet und nicht gelöscht wird
+                    adapter.notifyItemChanged(position)
+                }
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                // Optional: Hier kannst du visuelle Hinweise für das Swipen (z.B. Icons) hinzufügen
             }
         })
 
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
+    private fun deleteFromFirebase(itemKey: String) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
+
+        // Prüfen, ob "private" oder "business" bearbeitet wird
+        val path = if (setter == "private") {
+            "private"
+        } else {
+            "business"
+        }
+
+        val itemRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(itemKey)
+
+        itemRef.removeValue().addOnSuccessListener {
+            Toast.makeText(context, "Eintrag erfolgreich gelöscht!", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener { e ->
+            Toast.makeText(context, "Fehler beim Löschen des Eintrags: ${e.message}", Toast.LENGTH_LONG).show()
+            Log.e(TAG, "Fehler beim Löschen des Eintrags", e)
+        }
     }
 
     private fun loadPrivateData(email: String) {
