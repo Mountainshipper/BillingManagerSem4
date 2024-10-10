@@ -35,10 +35,10 @@ class StartApplication : AppCompatActivity() {
 
         // Set up FAB click listener
         fab.setOnClickListener {
-            if (isCurrentFragmentAddBill()) {
-                openShowBillFragment()  // Navigate to ShowBill if the current fragment is AddBill
+            if (isCurrentFragmentShowBill()) {
+                openAddBillFragment()  // Navigate to AddBill if the current fragment is ShowBill
             } else {
-                openAddBillFragment()  // Otherwise, navigate to AddBill
+                openShowBillFragment()  // Otherwise, navigate to ShowBill
             }
         }
 
@@ -56,10 +56,10 @@ class StartApplication : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    // Method to check if the current fragment is AddBillFragment
-    private fun isCurrentFragmentAddBill(): Boolean {
+    // Method to check if the current fragment is ShowBillFragment
+    private fun isCurrentFragmentShowBill(): Boolean {
         val currentFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_start_application)
-        return currentFragment is AddBillFragment
+        return currentFragment is ShowBillFragment
     }
 
     // Method to open AddBillFragment
@@ -86,10 +86,10 @@ class StartApplication : AppCompatActivity() {
 
     // Update the FAB icon based on the current fragment
     private fun updateFabIcon() {
-        if (isCurrentFragmentAddBill()) {
-            fab.setImageResource(R.drawable.home)  // Set to home icon
+        if (isCurrentFragmentShowBill()) {
+            fab.setImageResource(R.drawable.home)  // Set to plus icon when in ShowBill
         } else {
-            fab.setImageResource(R.drawable.add)   // Set to add icon
+            fab.setImageResource(R.drawable.add)  // Set to home icon when in AddBill
         }
     }
 
