@@ -1,6 +1,7 @@
 package applicationMain.ui.home
 
 
+import CustomAdapter
 import android.R
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -14,6 +15,9 @@ import android.widget.AdapterView
 import android.widget.Toast
 
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import applicationMain.ui.removeBill.RemoveBillFragment
 import com.example.semester4.databinding.FragmentShowbillBinding
@@ -25,15 +29,11 @@ class ShowBillFragment : Fragment() {
 
     private var _binding: FragmentShowbillBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var database: DatabaseReference
     private var setter: String = ""
+    private lateinit var adapter: CustomAdapter
+    private val dataList = mutableListOf<String>()
 
-    /**
-     * Inflates the layout with Data Binding, sets its lifecycle owner to the ShowBillFragment
-     * Implements onClickListener for the buttons. Private and Business
-     * Displays the data from the database in the textview
-     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,146 +42,97 @@ class ShowBillFragment : Fragment() {
         _binding = FragmentShowbillBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         val user = FirebaseAuth.getInstance().currentUser
-        val email = user?.email.toString()
-        val Email = email.replace(".", "_").replace("#", "").replace("$", "").replace("[", "")
-            .replace("]", "")
-        Miau(Email)
+        val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
+        Miau(email)
 
-
-        binding?.bbuissness?.setOnClickListener() {
-          Miau(Email)
+        binding.bbuissness.setOnClickListener {
+            Miau(email)
         }
 
-
-        //var text : Text?= null
-        _binding?.bprivate?.setOnClickListener() {
-            val dataList = mutableListOf<String>()
-            var counter = 0
-            var value2 = ""
-            val adapter =
-                RemoveBillFragment.CustomAdapter(
-                    requireActivity(),
-                    R.layout.simple_list_item_1,
-                    dataList
-                )
-            binding.DDisplayInfo.adapter = adapter
-
-            //dataList.add("----")
-
-            database =
-                FirebaseDatabase.getInstance().getReference("users").child(Email).child("private")
-            database.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (childSnapshot in snapshot.children) {
-                            val childKey = childSnapshot.key // get the child node's key
-                            val childValue = childSnapshot.getValue() // get the child node's value
-                            var value =
-                                "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
-                                    .replace("{", "")
-                                    .replace("}", " ").replace(",", "\n   ")
-                                    .replace(
-                                        "=", "                                                "
-                                    ).replace("steuer", "tax:   ").replace(
-                                        "date", "date: "
-                                    ).replace("title", "title: ")
-
-                            value =
-                                value.substringBefore("title") // Extract the substring before "date"
-                            dataList.add(
-                                value
-                            )
-                            value2 = dataList.toString()
-                        }
-                        //dataList.add("----")
-                        setter = "private"
-                    } else {
-                        // handle the case where the node does not exist
-                    }
-                    adapter.notifyDataSetChanged()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
-                    Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
-                }
-            })
-            binding?.DDisplayInfo?.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, view, position, id ->
-                    val childValue = dataList[position]
-                    // Launch TextEditorActivity with the modifiedChildValue as text
-                    val intent = Intent(requireContext(), TextEditorActivity::class.java)
-                    intent.putExtra("text", childValue)
-                    intent.putExtra("complete", value2)
-                    startActivity(intent)
-                }
+        binding.bprivate.setOnClickListener {
+            loadPrivateData(email)
         }
+
+        setupRecyclerView()
         return root
     }
 
-    fun Miau (Email: String){
-        val dataList = mutableListOf<String>()
-        var counter = 0
-        var value2 = ""
-        val adapter =
-            RemoveBillFragment.CustomAdapter(
-                requireActivity(),
-                R.layout.simple_list_item_1,
-                dataList
-            )
-        binding.DDisplayInfo.adapter = adapter
+    private fun setupRecyclerView() {
+        adapter = CustomAdapter(dataList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = adapter
 
-        //dataList.add("----")
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
 
-        database =
-            FirebaseDatabase.getInstance().getReference("users").child(Email).child("business")
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                dataList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                // Optional: Firebase aktualisieren und den Eintrag dort löschen
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
+    private fun loadPrivateData(email: String) {
+        database = FirebaseDatabase.getInstance().getReference("users").child(email).child("private")
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                dataList.clear()
                 if (snapshot.exists()) {
+                    var counter = 0
                     for (childSnapshot in snapshot.children) {
-                        val childKey = childSnapshot.key // get the child node's key
-                        val childValue = childSnapshot.getValue() // get the child node's value
-                        var value =
-                            "\n" + ++counter + ": " + childKey.toString() + "\n    " + childValue.toString()
-                                .replace("{", "")
-                                .replace("}", " ").replace(",", "\n   ")
-                                .replace(
-                                    "=", "                                                "
-                                ).replace("steuer", "tax:   ").replace(
-                                    "date", "date: "
-                                ).replace("title", "title: ")
-
-                        value =
-                            value.substringBefore("title") // Extract the substring before "date"
-                        dataList.add(
-                            value
-                        )
-                        value2 = dataList.toString()
+                        val childKey = childSnapshot.key
+                        val childValue = childSnapshot.getValue()
+                        var value = "\n${++counter}: $childKey\n    ${childValue.toString().replace("{", "").replace("}", " ").replace(",", "\n   ").replace("=", "                                                ").replace("steuer", "tax:   ").replace("date", "date: ").replace("title", "title: ")}"
+                        value = value.substringBefore("title")
+                        dataList.add(value)
                     }
-                    //dataList.add("----")
                     setter = "private"
-                } else {
-                    // handle the case where the node does not exist
                 }
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
+                Log.w(TAG, "Failed to read value.", error.toException())
                 Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
             }
         })
-        binding?.DDisplayInfo?.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
-                val childValue = dataList[position]
-                // Launch TextEditorActivity with the modifiedChildValue as text
-                val intent = Intent(requireContext(), TextEditorActivity::class.java)
-                intent.putExtra("text", childValue)
-                intent.putExtra("complete", value2)
-                startActivity(intent)
+    }
+
+    private fun Miau(email: String) {
+        database = FirebaseDatabase.getInstance().getReference("users").child(email).child("business")
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                dataList.clear()
+                if (snapshot.exists()) {
+                    var counter = 0
+                    for (childSnapshot in snapshot.children) {
+                        val childKey = childSnapshot.key
+                        val childValue = childSnapshot.getValue()
+                        var value = "\n${++counter}: $childKey\n    ${childValue.toString().replace("{", "").replace("}", " ").replace(",", "\n   ").replace("=", "                                                ").replace("steuer", "tax:   ").replace("date", "date: ").replace("title", "title: ")}"
+                        value = value.substringBefore("title")
+                        dataList.add(value)
+                    }
+                    setter = "business"
+                }
+                adapter.notifyDataSetChanged()
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+                Toast.makeText(context, "Failed to read value.", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onDestroyView() {
