@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="applicationMain.ui.home.">
+    tools:context="applicationMain.ui.home.ShowBillFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,9 +26,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="16dp"
                 app:singleSelection="true"
-                app:selectionRequired="true"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:selectionRequired="true">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bbuissness"
@@ -66,13 +64,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="431dp"
-            android:paddingStart="24dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="14dp"
-            android:paddingBottom="16dp"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="1dp" />
+            android:layout_height="match_parent"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

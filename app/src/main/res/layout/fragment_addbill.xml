@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,18 +7,17 @@
     android:background="@color/black"
     tools:context="applicationMain.ui.addBill.AddBillFragment">
 
-
     <CheckBox
         android:id="@+id/Private"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/private2"
-        app:layout_constraintBottom_toBottomOf="@+id/Business"
-        app:layout_constraintEnd_toStartOf="@+id/Business"
-        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Business"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/dateD"
+        app:layout_constraintVertical_bias="0.107" />
 
     <CheckBox
         android:id="@+id/Business"
@@ -26,10 +26,10 @@
         android:text="@string/buisness2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
+        app:layout_constraintHorizontal_bias="0.739"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
+        app:layout_constraintTop_toBottomOf="@+id/dateD"
+        app:layout_constraintVertical_bias="0.107" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
@@ -55,10 +55,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/AddBillHin1"
             android:inputType="textEmailAddress" />
-
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordLayout"
@@ -84,7 +81,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/AddBillHin2"
             android:inputType="numberDecimal" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -115,65 +111,20 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <TextView
-        android:id="@+id/steuersatz"
-        android:layout_width="239dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="236dp"
-        android:gravity="center"
-        android:text="@string/AddBillHin4"
-        android:textSize="7pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
-
-    <CheckBox
-        android:id="@+id/check20"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:text="20%"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/steuersatz"
-        app:layout_constraintVertical_bias="0.072" />
-
-    <CheckBox
-        android:id="@+id/check10"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="10%"
-        app:layout_constraintBottom_toBottomOf="@+id/check20"
-        app:layout_constraintStart_toEndOf="@+id/check20"
-        app:layout_constraintTop_toTopOf="@+id/check20" />
-
-    <CheckBox
-        android:id="@+id/check13"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="13%"
-        app:layout_constraintBottom_toBottomOf="@+id/check10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toEndOf="@+id/check10"
-        app:layout_constraintTop_toTopOf="@+id/check10"
-        app:layout_constraintVertical_bias="0.0" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_setWork"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
         android:text="@string/AddBillHin5"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.872"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 

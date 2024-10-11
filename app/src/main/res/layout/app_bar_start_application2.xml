@@ -7,6 +7,7 @@
     tools:context="applicationMain.StartApplication">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
@@ -25,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_marginEnd="@dimen/fab_margin"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="30dp"
                 app:srcCompat="@drawable/baseline_logout_24" />
             />
         </androidx.appcompat.widget.Toolbar>

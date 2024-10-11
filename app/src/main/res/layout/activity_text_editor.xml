@@ -9,6 +9,19 @@
     android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context="applicationMain.ui.home.TextEditorActivity">
 
+    <!-- Dustbin Icon for Deletion -->
+    <ImageView
+        android:id="@+id/deleteIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/dustbin"
+        android:contentDescription="Delete entry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleLayout"
         style="@style/LoginTextInputOuterFieldStyle"
@@ -24,7 +37,7 @@
         app:strokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/deleteIcon">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditor"
@@ -35,6 +48,7 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Date Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dateLayout"
         style="@style/LoginTextInputOuterFieldStyle"
@@ -63,64 +77,7 @@
             android:clickable="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/taxLayout"
-        style="@style/LoginTextInputOuterFieldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="24dp"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white"
-        android:textColor="@color/white"
-        app:cornerRadius="15dp"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/taxEditor"
-            style="@style/LoginTextInputInnerFieldStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Steuerbetrag eingeben"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/taxLayout">
-
-        <CheckBox
-            android:id="@+id/check20"
-            android:layout_marginLeft="96dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20%" />
-
-        <CheckBox
-            android:id="@+id/check10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="10%" />
-
-        <CheckBox
-            android:id="@+id/check13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="13%" />
-    </LinearLayout>
-
+    <!-- Save Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -133,8 +90,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/dateLayout" />
 
+    <!-- Return Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/returnLogin2"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"

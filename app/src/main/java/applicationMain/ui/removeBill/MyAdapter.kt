@@ -26,10 +26,10 @@ class MyAdapter(
         val inflater: LayoutInflater = LayoutInflater.from(context)
         val view: View = inflater.inflate(R.layout.list_item, parent, false)
 
-        val title: ImageView = view.findViewById(R.id.titleD)
-        val price: ImageView = view.findViewById(R.id.priceD)
-        val steuer: ImageView = view.findViewById(R.id.steuerD)
-        val date: ImageView = view.findViewById(R.id.dateD)
+//        val title: ImageView = view.findViewById(R.id.titleD)
+//        val price: ImageView = view.findViewById(R.id.priceD)
+//        val steuer: ImageView = view.findViewById(R.id.steuerD)
+//        val date: ImageView = view.findViewById(R.id.dateD)
 
 
 
