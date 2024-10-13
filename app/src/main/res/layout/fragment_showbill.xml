@@ -58,10 +58,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black" />
+            android:background="@drawable/login_background"
+            />
 
         <!-- Display area (RecyclerView) -->
         <androidx.recyclerview.widget.RecyclerView
+            android:background="@drawable/login_background"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context="applicationMain.ui.addBill.AddBillFragment">
+    android:background="@drawable/login_background"
+    tools:context="applicationMain.ui.addBill.AddBillFragment"
+
+    >
 
     <CheckBox
+
         android:id="@+id/Private"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -97,6 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
         app:strokeColor="@color/white"
         app:strokeWidth="2dp">
 

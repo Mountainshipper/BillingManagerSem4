@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/login_background"
     android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context="applicationMain.ui.home.TextEditorActivity">
 
@@ -36,6 +36,7 @@
         app:cornerRadius="15dp"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deleteIcon">
