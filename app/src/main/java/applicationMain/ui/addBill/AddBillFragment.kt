@@ -1,7 +1,6 @@
 package applicationMain.ui.addBill
 
 import android.app.DatePickerDialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -22,7 +21,6 @@ class AddBillFragment : Fragment() {
     private val binding2 get() = _binding!!
     private lateinit var database: DatabaseReference
     var category: String = ""
-    var date2: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,26 +38,16 @@ class AddBillFragment : Fragment() {
             textView.text = it
         }
 
-        _binding!!.txtDeadline.setOnClickListener() {
-            val selectedDateTextView = _binding!!.txtDeadline
-            val date = DatePickerDialog(
-                this.requireContext(),
-                { _, year, monthOfYear, dayOfMonth ->
-                    selectedDateTextView.setText("$dayOfMonth-${monthOfYear + 1}-$year")
-                },
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-            )
-            date.show()
+        // Use the new DatePicker implementation
+        _binding!!.txtDeadline.setOnClickListener {
+            showDatePicker()
         }
 
-        _binding?.btnSetWork?.setOnClickListener() {
-
+        _binding?.btnSetWork?.setOnClickListener {
             val title = _binding!!.BillTitle.text.toString()
             val price = _binding!!.txtTitel.text.toString()
             val private = _binding!!.Private.isChecked
-            val buisness = _binding!!.Business.isChecked
+            val business = _binding!!.Business.isChecked
             val date = _binding!!.txtDeadline.text.toString()
 
             if (title.isEmpty() || price.isEmpty()) {
@@ -67,14 +55,14 @@ class AddBillFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (!((!private || buisness) || (private || !buisness))) {
+            if (!((!private || business) || (private || !business))) {
                 Toast.makeText(context, "Private or business was not selected", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-            category = if (private && !buisness) {
+            category = if (private && !business) {
                 "private"
-            } else if (buisness && !private) {
+            } else if (business && !private) {
                 "business"
             } else {
                 Toast.makeText(context, "Please select either private or business", Toast.LENGTH_LONG).show()
@@ -84,16 +72,33 @@ class AddBillFragment : Fragment() {
             // Save the bill in Firebase
             database = FirebaseDatabase.getInstance().reference
             val user = FirebaseAuth.getInstance().currentUser
-            val email = user?.email.toString()
-            val Email = email.replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
+            val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
             val bill = Bill(title, price, date)
-            database.child("users").child(Email).child(category).child(title).setValue(bill)
+            database.child("users").child(email).child(category).child(title).setValue(bill)
             Toast.makeText(context, "Bill added", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(requireContext(), StartApplication::class.java)
             startActivity(intent)
         }
         return root
+    }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val formattedDate = String.format("%02d.%02d.%d", selectedDay, selectedMonth + 1, selectedYear)
+                _binding!!.txtDeadline.setText(formattedDate) // Set the date in the text field
+            },
+            year, month, day
+        )
+
+        datePickerDialog.show()
     }
 
     override fun onDestroyView() {

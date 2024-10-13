@@ -101,13 +101,14 @@
         app:strokeWidth="2dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_deadline"
+            android:id="@+id/txtDeadline"
             style="@style/LoginTextInputInnerFieldStyle"
-            android:hint="@string/AddBillHin3"
-            android:datePickerMode="calendar"
             android:layout_width="match_parent"
-            android:inputType="date"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="Datum auswählen"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
