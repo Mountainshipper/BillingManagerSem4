@@ -63,14 +63,14 @@
 
         <!-- Display area (RecyclerView) -->
         <androidx.recyclerview.widget.RecyclerView
-            android:background="@drawable/login_background"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/login_background"
             android:paddingStart="12dp"
             android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp" />
+            android:paddingEnd="52dp"
+            android:paddingBottom="78dp" />
 
     </LinearLayout>
 

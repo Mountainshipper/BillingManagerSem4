@@ -31,11 +31,11 @@
     <string name="Help1">Help with creating an account</string>
 
     //Add bill
-    <string name="AddBillHin1">Title of receipt</string>
-    <string name="AddBillHin2">Type the price of product</string>
-    <string name="AddBillHin3">Date (double press)</string>
+    <string name="AddBillHin1">Title</string>
+    <string name="AddBillHin2">Price</string>
+    <string name="AddBillHin3">Date</string>
     <string name="AddBillHin4">Tax rate:</string>
-    <string name="AddBillHin5">add bill </string>
+    <string name="AddBillHin5">Add bill </string>
 
     //Login SignUp
     <string name="Login1">Type your Email </string>

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import applicationMain.StartApplication
-import com.example.semester4.databinding.FragmentAddbillBinding
+import com.example.semester4.databinding.AddBillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,7 +17,7 @@ import java.util.*
 
 class AddBillFragment : Fragment() {
 
-    private var _binding: FragmentAddbillBinding? = null
+    private var _binding: AddBillBinding? = null
     private val binding2 get() = _binding!!
     private lateinit var database: DatabaseReference
     var category: String = ""
@@ -30,7 +30,7 @@ class AddBillFragment : Fragment() {
         val galleryViewModel =
             ViewModelProvider(this).get(AddBillViewModel::class.java)
 
-        _binding = FragmentAddbillBinding.inflate(inflater, container, false)
+        _binding = AddBillBinding.inflate(inflater, container, false)
         val root: View = binding2.root
 
         val textView: TextView = binding2.BillTitle

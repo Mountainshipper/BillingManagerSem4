@@ -4,14 +4,14 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.semester4.databinding.ActivityTextEditorBinding
+import com.example.semester4.databinding.ChangeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
 class TextEditorActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTextEditorBinding
+    private lateinit var binding: ChangeBinding
     private var textKey = ""
     private var isPrivate = true
     private val user = FirebaseAuth.getInstance().currentUser
@@ -19,7 +19,7 @@ class TextEditorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTextEditorBinding.inflate(layoutInflater)
+        binding = ChangeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         textKey = intent.getStringExtra("textKey").toString() // Receive the key for the entry

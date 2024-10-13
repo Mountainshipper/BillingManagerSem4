@@ -15,7 +15,7 @@
         android:id="@+id/add_Bill"
         android:name="applicationMain.ui.addBill.AddBillFragment"
         android:label="@string/AddBill"
-        tools:layout="@layout/fragment_addbill" />
+        tools:layout="@layout/add_bill" />
 
     <fragment
         android:id="@+id/remove_Bill"
