@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -39,6 +40,9 @@ class AddBillFragment : Fragment() {
     private var imageUrl: String? = null
     private var capturedPhoto: Bitmap? = null
 
+    // New ImageView reference
+    private lateinit var imageViewCapturedPhoto: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +58,9 @@ class AddBillFragment : Fragment() {
         galleryViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        // Initialize ImageView
+        imageViewCapturedPhoto = _binding!!.imgCapturedPhoto
 
         // Use the new DatePicker implementation
         _binding!!.txtDeadline.setOnClickListener {
@@ -89,19 +96,6 @@ class AddBillFragment : Fragment() {
             database = FirebaseDatabase.getInstance().reference
             storageRef = FirebaseStorage.getInstance().reference
 
-            /*
-            val user = FirebaseAuth.getInstance().currentUser
-            val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
-            // db
-            val bill = Bill(title, price, date, imageUrl)
-            database.child("users").child(email).child(category).child(title).setValue(bill)
-            Toast.makeText(context, "Bill added", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(requireContext(), StartApplication::class.java)
-            startActivity(intent)
-            */
-
-
             // save
             capturedPhoto?.let {
                 uploadPhotoToFirebase(it) { uploadedImageUrl  ->
@@ -115,19 +109,16 @@ class AddBillFragment : Fragment() {
                 // If no image is available, save the invoice without an image
                 saveBillToFirebase(title, price, date, null)
             }
-
-
         }
+
         //camera
         _binding?.btnCamera?.setOnClickListener {
             checkPermissionCamera()
         }
         initCameraRequest()
 
-
         return root
     }
-
 
     private fun saveBillToFirebase(title: String, price: String, date: String, imageUrl: String?) {
         val user = FirebaseAuth.getInstance().currentUser
@@ -144,8 +135,6 @@ class AddBillFragment : Fragment() {
         val intent = Intent(requireContext(), StartApplication::class.java)
         startActivity(intent)
     }
-
-
 
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
@@ -169,8 +158,6 @@ class AddBillFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 
     // camera & storage
 
@@ -200,25 +187,23 @@ class AddBillFragment : Fragment() {
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, 100)
-        //startActivity(cameraIntent)
     }
 
-
-    // storage:
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             val photo = data?.extras?.get("data") as Bitmap
-            // temporarily save
+            // Temporär speichern
             capturedPhoto = photo
 
-            // upload to firebaseStorage
+            // Setze das aufgenommene Bild in das ImageView
+            imageViewCapturedPhoto.setImageBitmap(photo)
+
+            // Optional: Bild zu Firebase hochladen
             // uploadPhotoToFirebase(photo)
         }
     }
-
-
 
     private fun uploadPhotoToFirebase(photo: Bitmap, onSuccess: (String?) -> Unit){
         // Create a reference to the storage location
@@ -227,7 +212,6 @@ class AddBillFragment : Fragment() {
         // Convert the image to a byte array
         val baos = ByteArrayOutputStream()
         photo.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        // photo.compress(Bitmap.CompressFormat.JPEG, 50, baos)
         val data = baos.toByteArray()
 
         // Start Upload
@@ -238,17 +222,12 @@ class AddBillFragment : Fragment() {
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 imageUrl = uri.toString()
                 onSuccess(imageUrl)
-                // Toast.makeText(context, "Foto hochgeladen: $uri", Toast.LENGTH_SHORT).show()
-                // Toast.makeText(context, "Foto hochgeladen :)", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 onSuccess(null)
                 Toast.makeText(context, "Fehler beim Abrufen der Bild-URL", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener {
             onSuccess(null)
-            // Toast.makeText(context, "Fehler beim Hochladen :(", Toast.LENGTH_SHORT).show()
-            //imageUrl = null
         }
     }
-
 }
