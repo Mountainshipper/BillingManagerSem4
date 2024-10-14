@@ -3,9 +3,11 @@ package applicationMain.ui.home
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import applicationMain.ui.home.FullScreenImageActivity
+import com.bumptech.glide.Glide // Glide for loading images
 import com.example.semester4.databinding.ChangeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -22,26 +24,29 @@ class TextEditorActivity : AppCompatActivity() {
     private val user = FirebaseAuth.getInstance().currentUser
     private val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ChangeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Retrieve data passed from the previous activity
         textKey = intent.getStringExtra("textKey").toString() // Receive the key for the entry
         isPrivate = intent.getBooleanExtra("isPrivate", true)
 
+        // Load data from Firebase
         loadDataFromFirebase()
 
+        // Save button listener to save changes to Firebase
         binding.saveButton.setOnClickListener {
             saveChangesToFirebase() // Save changes
         }
 
+        // Return button to finish the activity
         binding.returnLogin2.setOnClickListener {
             finish() // Return to the previous activity
         }
 
+        // Date picker dialog when clicking the date editor
         binding.dateEditor.setOnClickListener {
             showDatePicker() // Open the Date Picker
         }
@@ -51,6 +56,7 @@ class TextEditorActivity : AppCompatActivity() {
             deleteEntryFromFirebase() // Delete the entry
         }
 
+        // Show bill button to view the image in full screen
         binding.showBill.setOnClickListener {
             if (imageUrl.isNullOrEmpty()) {
                 Toast.makeText(this, "Kein Bild verfügbar", Toast.LENGTH_SHORT).show()
@@ -62,9 +68,16 @@ class TextEditorActivity : AppCompatActivity() {
             }
         }
 
-
+        // Automatically load the image if available
+        if (!imageUrl.isNullOrEmpty()) {
+            val imageView: ImageView = binding.loadedImageView
+            Glide.with(this)
+                .load(imageUrl)
+                .into(imageView) // Load image into ImageView
+        }
     }
 
+    // Load data from Firebase based on the provided textKey
     private fun loadDataFromFirebase() {
         val path = if (isPrivate) "private" else "business"
         val itemRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(textKey)
@@ -75,9 +88,13 @@ class TextEditorActivity : AppCompatActivity() {
                 binding.titleEditor.setText(dataMap["title"] as? String ?: "")
                 binding.dateEditor.setText(dataMap["date"] as? String ?: "")
 
-                // imageUrl
+                // Retrieve imageUrl and load it into the ImageView if it exists
                 imageUrl = dataMap["imageUrl"] as? String
-
+                if (!imageUrl.isNullOrEmpty()) {
+                    Glide.with(this)
+                        .load(imageUrl)
+                        .into(binding.loadedImageView)
+                }
 
             } else {
                 Toast.makeText(this, "Eintrag nicht gefunden!", Toast.LENGTH_SHORT).show()
@@ -87,16 +104,18 @@ class TextEditorActivity : AppCompatActivity() {
         }
     }
 
+    // Save the changes made in the title and date fields to Firebase
     private fun saveChangesToFirebase() {
         val newTitle = binding.titleEditor.text.toString()
         val newDate = binding.dateEditor.text.toString()
 
+        // Check if all fields are filled
         if (newTitle.isEmpty() || newDate.isEmpty()) {
             Toast.makeText(this, "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Update the entire object
+        // Prepare the updated data to save
         val updatedData = mapOf(
             "title" to newTitle,
             "date" to newDate
@@ -105,6 +124,7 @@ class TextEditorActivity : AppCompatActivity() {
         val path = if (isPrivate) "private" else "business"
         val entryRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(textKey)
 
+        // Save the updated data to Firebase
         entryRef.setValue(updatedData).addOnSuccessListener {
             Toast.makeText(this, "Änderungen erfolgreich gespeichert!", Toast.LENGTH_SHORT).show()
             finish() // Return to the previous view
@@ -113,14 +133,17 @@ class TextEditorActivity : AppCompatActivity() {
         }
     }
 
+    // Delete the entry from Firebase
     private fun deleteEntryFromFirebase() {
         val path = if (isPrivate) "private" else "business"
         val entryRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(textKey)
 
+        // If an image exists, delete it from Firebase Storage
         if (!imageUrl.isNullOrEmpty()) {
             deleteImageFromFirebaseStorage(imageUrl!!)
         }
 
+        // Delete the entry from the database
         entryRef.removeValue().addOnSuccessListener {
             Toast.makeText(this, "Eintrag erfolgreich gelöscht!", Toast.LENGTH_SHORT).show()
             finish() // Return to the previous view after deletion
@@ -129,6 +152,7 @@ class TextEditorActivity : AppCompatActivity() {
         }
     }
 
+    // Show the date picker dialog for selecting a date
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -143,18 +167,14 @@ class TextEditorActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-
-    // Delete storage with the URL
+    // Delete image from Firebase Storage
     private fun deleteImageFromFirebaseStorage(imageUrl: String) {
-
         val storageReference: StorageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
 
         storageReference.delete().addOnSuccessListener {
-            // Toast.makeText(this, "Bild erfolgreich gelöscht!", Toast.LENGTH_SHORT).show()
+            // Image deleted successfully
         }.addOnFailureListener { e ->
-            // Toast.makeText(this, "Fehler beim Löschen des Bildes: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Fehler beim Löschen des Bildes: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
-
-
 }
