@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -84,57 +83,68 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Datum auswählen"
-            android:inputType="none"
+            android:clickable="true"
             android:focusable="false"
-            android:clickable="true" />
+            android:hint="Datum auswählen"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Private Checkbox -->
+
+    <!-- Business Checkbox -->
+
+    <!-- ImageView for displaying the captured photo -->
+
+    <!-- Add Photo Button -->
+
+    <!-- Add Bill Button -->
+
     <CheckBox
         android:id="@+id/Private"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="294dp"
         android:text="@string/private2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateD"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- Business Checkbox -->
     <CheckBox
         android:id="@+id/Business"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="294dp"
         android:text="@string/buisness2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintHorizontal_bias="0.729"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateD"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- ImageView for displaying the captured photo -->
     <ImageView
         android:id="@+id/imgCapturedPhoto"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="364dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/Business"
-        app:layout_constraintBottom_toTopOf="@id/btn_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
 
-    <!-- Add Photo Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_camera"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="528dp"
         android:text="@string/AddBillHin6"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
@@ -143,16 +153,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintVertical_bias="0.064"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
-    <!-- Add Bill Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_setWork"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="596dp"
         android:text="@string/AddBillHin5"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
@@ -161,7 +171,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872"
+        app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
