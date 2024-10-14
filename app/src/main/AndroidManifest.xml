@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Semester4">
         <activity
+            android:name="applicationMain.ui.home.FullScreenImageActivity"
+            android:exported="false" />
+        <activity
             android:name="applicationMain.ui.home.TextEditorActivity"
             android:exported="false" />
         <activity

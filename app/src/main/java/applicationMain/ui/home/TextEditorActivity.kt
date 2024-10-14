@@ -1,21 +1,28 @@
 package applicationMain.ui.home
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import applicationMain.ui.home.FullScreenImageActivity
 import com.example.semester4.databinding.ChangeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import java.util.Calendar
 
 class TextEditorActivity : AppCompatActivity() {
 
     private lateinit var binding: ChangeBinding
+    private var imageUrl: String? = null
     private var textKey = ""
     private var isPrivate = true
     private val user = FirebaseAuth.getInstance().currentUser
     private val email = user?.email.toString().replace(".", "_").replace("#", "").replace("$", "").replace("[", "").replace("]", "")
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +50,19 @@ class TextEditorActivity : AppCompatActivity() {
         binding.deleteIcon.setOnClickListener {
             deleteEntryFromFirebase() // Delete the entry
         }
+
+        binding.showBill.setOnClickListener {
+            if (imageUrl.isNullOrEmpty()) {
+                Toast.makeText(this, "Kein Bild verfügbar", Toast.LENGTH_SHORT).show()
+            } else {
+                // If the URL is available, start the FullScreenImageActivity
+                val intent = Intent(this, FullScreenImageActivity::class.java)
+                intent.putExtra("imageUrl", imageUrl)
+                startActivity(intent)
+            }
+        }
+
+
     }
 
     private fun loadDataFromFirebase() {
@@ -54,6 +74,11 @@ class TextEditorActivity : AppCompatActivity() {
                 val dataMap = snapshot.value as Map<*, *>
                 binding.titleEditor.setText(dataMap["title"] as? String ?: "")
                 binding.dateEditor.setText(dataMap["date"] as? String ?: "")
+
+                // imageUrl
+                imageUrl = dataMap["imageUrl"] as? String
+
+
             } else {
                 Toast.makeText(this, "Eintrag nicht gefunden!", Toast.LENGTH_SHORT).show()
             }
@@ -92,6 +117,10 @@ class TextEditorActivity : AppCompatActivity() {
         val path = if (isPrivate) "private" else "business"
         val entryRef = FirebaseDatabase.getInstance().getReference("users").child(email).child(path).child(textKey)
 
+        if (!imageUrl.isNullOrEmpty()) {
+            deleteImageFromFirebaseStorage(imageUrl!!)
+        }
+
         entryRef.removeValue().addOnSuccessListener {
             Toast.makeText(this, "Eintrag erfolgreich gelöscht!", Toast.LENGTH_SHORT).show()
             finish() // Return to the previous view after deletion
@@ -113,4 +142,19 @@ class TextEditorActivity : AppCompatActivity() {
 
         datePickerDialog.show()
     }
+
+
+    // Delete storage with the URL
+    private fun deleteImageFromFirebaseStorage(imageUrl: String) {
+
+        val storageReference: StorageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
+
+        storageReference.delete().addOnSuccessListener {
+            // Toast.makeText(this, "Bild erfolgreich gelöscht!", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener { e ->
+            // Toast.makeText(this, "Fehler beim Löschen des Bildes: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
 }

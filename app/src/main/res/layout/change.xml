@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/showBill" />
 
     <!-- Return Button -->
     <com.google.android.material.button.MaterialButton
@@ -107,5 +107,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
+
+
+    <!-- showPhoto Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/showBill"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="show Bill"
+        android:textColor="@color/white"
+        app:cornerRadius="15dp"
+        app:layout_constraintTop_toBottomOf="@id/dateLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/saveButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

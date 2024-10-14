@@ -36,6 +36,7 @@
     <string name="AddBillHin3">Date</string>
     <string name="AddBillHin4">Tax rate:</string>
     <string name="AddBillHin5">Add bill </string>
+    <string name="AddBillHin6">Add Photo </string>
 
     //Login SignUp
     <string name="Login1">Type your Email </string>
@@ -47,14 +48,6 @@
     <string name="Login7"><u>Reset Password</u></string>
     <string name="SignUp">Sign up</string>
     <string name="SignUp2"><u>Already Registered, Sign In!</u></string>
-
-
-
-
-
-
-
-
 
 
 </resources>
