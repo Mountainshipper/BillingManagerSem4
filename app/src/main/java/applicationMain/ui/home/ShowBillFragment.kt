@@ -21,7 +21,7 @@ class ShowBillFragment : Fragment() {
     private var setter: String = ""
     private lateinit var adapter: CustomAdapter
     private val dataList = mutableListOf<String>()
-    private var transfer: String = "";
+    private val dataKeyList = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +48,9 @@ class ShowBillFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = CustomAdapter(dataList) { textKey ->
-            openTextEditor(transfer, setter == "private")
+        adapter = CustomAdapter(dataList) { position ->
+            val selectedKey = dataKeyList[position]
+            openTextEditor(selectedKey, setter == "private")
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
@@ -60,12 +61,14 @@ class ShowBillFragment : Fragment() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 dataList.clear()
+                dataKeyList.clear()
                 if (snapshot.exists()) {
                     for (childSnapshot in snapshot.children) {
                         val childValue = childSnapshot.getValue() as Map<*, *>
                         val title = childValue["title"] as? String ?: "Unbekannt"
-                        transfer = childSnapshot.key ?: ""
-                        dataList.add(title) // Use the key to identify the item
+                        val key = childSnapshot.key ?: ""
+                        dataList.add(title)
+                        dataKeyList.add(key)
                     }
                     setter = "private"
                 }
@@ -83,12 +86,14 @@ class ShowBillFragment : Fragment() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 dataList.clear()
+                dataKeyList.clear()
                 if (snapshot.exists()) {
                     for (childSnapshot in snapshot.children) {
                         val childValue = childSnapshot.getValue() as Map<*, *>
                         val title = childValue["title"] as? String ?: "Unbekannt"
-                        transfer = childSnapshot.key ?: ""
-                        dataList.add(title) // Use the key to identify the item
+                        val key = childSnapshot.key ?: ""
+                        dataList.add(title)
+                        dataKeyList.add(key)
                     }
                     setter = "business"
                 }

@@ -8,7 +8,7 @@ import com.example.semester4.R
 
 class CustomAdapter(
     private val dataList: List<String>,
-    private val itemClickListener: (String) -> Unit
+    private val itemClickListener: (Int) -> Unit
 ) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,8 +19,8 @@ class CustomAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemText.text = dataList[position]
         holder.itemView.setOnClickListener {
-            // Trigger the click listener with the clicked item's data
-            itemClickListener(dataList[position])
+            // Übergibt die Position des geklickten Elements
+            itemClickListener(position)
         }
     }
 

@@ -87,7 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="show Bill"
+        android:text="Fullscreen Image"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@id/saveButton"
