@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/login_background"
     tools:context="applicationMain.ui.help.Help">
 
     <com.google.android.material.button.MaterialButton
@@ -88,7 +88,7 @@
         android:layout_width="174dp"
         android:layout_height="83dp"
         android:layout_marginTop="360dp"
-        android:text="Day"
+        android:text="@string/HelpText2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="48sp"

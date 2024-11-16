@@ -5,17 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/login_background"
     android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context="login.Login">
 
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="242dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="98dp"
+        android:layout_width="352dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="92dp"
         android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,17 +27,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="350dp"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white"
+        android:layout_marginTop="264dp"
         android:textColor="@color/white"
+        app:boxStrokeColor="@color/white"
         app:cornerRadius="15dp"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEt"
@@ -68,7 +68,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=""
+            android:hint="@string/Login2"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
-        app:layout_constraintVertical_bias="0.429"
+        app:layout_constraintVertical_bias="0.265"
 
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
@@ -103,6 +103,20 @@
         app:layout_constraintTop_toBottomOf="@+id/signUp"
         app:layout_constraintVertical_bias="0.166" />
 
+
+    <TextView
+        android:id="@+id/resetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Login7"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUp"
+        app:layout_constraintVertical_bias="0.391" />
+
     <TextView
         android:id="@+id/help"
         android:layout_width="wrap_content"
@@ -113,6 +127,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUp"
-        app:layout_constraintVertical_bias="0.555" />
+        app:layout_constraintVertical_bias="0.633" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

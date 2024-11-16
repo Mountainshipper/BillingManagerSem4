@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.semester4.databinding.FragmentRemovebillBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 
 
 class RemoveBillFragment : Fragment() {
@@ -161,14 +162,17 @@ class RemoveBillFragment : Fragment() {
         }
 
         _binding?.delete?.setOnClickListener() {
-
+            Log.e("DeleteImage", "Fehlerhafte URL oder Ausnahme")
             val delete = _binding?.deleteTitle?.text.toString()
             if (delete.isNotEmpty()) {
                 database = FirebaseDatabase.getInstance().getReference("users")
+
                 if (setter == "private") {
                     database.child(Email).child("private").child(delete).removeValue()
                         .addOnSuccessListener {
                             Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show()
+                        }.addOnFailureListener() {
+                            Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show()
                         }
                 } else if (setter == "business") {
                     database.child(Email).child("business").child(delete).removeValue()
@@ -185,6 +189,9 @@ class RemoveBillFragment : Fragment() {
                     ).show()
                 }
             }
+
+
+
 
         }
 
@@ -226,4 +233,7 @@ class RemoveBillFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 }

@@ -3,34 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/login_background"
     tools:context="applicationMain.ui.addBill.AddBillFragment">
 
-
-    <CheckBox
-        android:id="@+id/Private"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="@string/private2"
-        app:layout_constraintBottom_toBottomOf="@+id/Business"
-        app:layout_constraintEnd_toStartOf="@+id/Business"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Business"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <CheckBox
-        android:id="@+id/Business"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="@string/buisness2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
-
+    <!-- Title TextInputLayout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
         style="@style/LoginTextInputOuterFieldStyle"
@@ -55,11 +31,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/AddBillHin1"
             android:inputType="textEmailAddress" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
+    <!-- Price TextInputLayout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordLayout"
         style="@style/LoginTextInputOuterFieldStyle"
@@ -84,9 +58,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/AddBillHin2"
             android:inputType="numberDecimal" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Date TextInputLayout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dateD"
         style="@style/LoginTextInputOuterFieldStyle"
@@ -105,75 +79,99 @@
         app:strokeWidth="2dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_deadline"
+            android:id="@+id/txtDeadline"
             style="@style/LoginTextInputInnerFieldStyle"
-            android:hint="@string/AddBillHin3"
-            android:datePickerMode="calendar"
             android:layout_width="match_parent"
-            android:inputType="date"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Datum auswählen"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Private Checkbox -->
 
-    <TextView
-        android:id="@+id/steuersatz"
-        android:layout_width="239dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="236dp"
-        android:gravity="center"
-        android:text="@string/AddBillHin4"
-        android:textSize="7pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
+    <!-- Business Checkbox -->
+
+    <!-- ImageView for displaying the captured photo -->
+
+    <!-- Add Photo Button -->
+
+    <!-- Add Bill Button -->
 
     <CheckBox
-        android:id="@+id/check20"
+        android:id="@+id/Private"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:text="20%"
+        android:layout_marginTop="294dp"
+        android:text="@string/private2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/steuersatz"
-        app:layout_constraintVertical_bias="0.072" />
-
-    <CheckBox
-        android:id="@+id/check10"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="10%"
-        app:layout_constraintBottom_toBottomOf="@+id/check20"
-        app:layout_constraintStart_toEndOf="@+id/check20"
-        app:layout_constraintTop_toTopOf="@+id/check20" />
-
-    <CheckBox
-        android:id="@+id/check13"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="13%"
-        app:layout_constraintBottom_toBottomOf="@+id/check10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toEndOf="@+id/check10"
-        app:layout_constraintTop_toTopOf="@+id/check10"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/Business"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="294dp"
+        android:text="@string/buisness2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imgCapturedPhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="364dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_camera"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="528dp"
+        android:text="@string/AddBillHin6"
+        android:textColor="@color/white"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_setWork"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginTop="596dp"
         android:text="@string/AddBillHin5"
         android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
